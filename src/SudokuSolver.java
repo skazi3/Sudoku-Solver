@@ -11,9 +11,11 @@ public class SudokuSolver extends JFrame{
 	
 	public SudokuSolver() {
 		super("Suduko Solver");
-		container = getContentPane();
 		grid = new GridLayout(GRID_SIZE,GRID_SIZE, 3,3);
+		
+		container = getContentPane();
 		container.setLayout(grid);
+		//loop through and add a sub-grid
 		for(int row = 0; row < GRID_SIZE; row++) {
 			for(int col = 0; col < GRID_SIZE; col++) {
 				container.add(new MyGrid().getContainer());
@@ -24,11 +26,6 @@ public class SudokuSolver extends JFrame{
 		setTitle("Sudoku Solver");
 		setVisible(true);
 		
-	}
-	private class al implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-		}
 	}
 }
 	
