@@ -23,6 +23,7 @@ public class HelperButtons {
 		}
 		helperButtons[9] = new JButton(e);
 		panel.add(helperButtons[9]);
+		panel.setBackground(Color.LIGHT_GRAY);
 	}
 	public JButton getButton(int i) {
 		return helperButtons[i];
