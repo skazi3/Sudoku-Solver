@@ -13,11 +13,14 @@ public class SudokuSolver extends JFrame{
 	public SudokuSolver() {
 		super("Suduko Solver");
 		HelperButtons hb = new HelperButtons();
+		MyJMenuBar menuBar = new MyJMenuBar();
+		
 		c = getContentPane();
 		c.setLayout(new BorderLayout());
 		c.add(makeGrid());
 		c.add(hb.getPanel(), BorderLayout.EAST);
 		c.setBackground(Color.gray);
+		setJMenuBar(menuBar.getMenuBar());
 		setSize(450, 450);
 		setVisible(true);
 		
