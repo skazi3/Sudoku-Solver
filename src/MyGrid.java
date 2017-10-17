@@ -3,44 +3,63 @@ import java.util.*;
 import javax.swing.*;
 
 public class MyGrid{
-	private GridLayout sudukoGrid;
+	private GridLayout subGrid, sudokuGrid;
 	private JButton[][] numbers; 
 	private int GRID_SIZE = 3;
-	private Container c;
+	private Container subContainer, container;
 	
-	//constructor
+	//constructor for the actual grid
 	MyGrid(){
-		sudukoGrid = new GridLayout(GRID_SIZE,GRID_SIZE,0, 0);
+
+		sudokuGrid = new GridLayout(GRID_SIZE,GRID_SIZE, 3,3);
+		container = new Container();
+		container.setLayout(sudokuGrid);
+
+		//loop through and add a sub-grid
+		for(int i =0; i < GRID_SIZE*3; i++) {
+			container.add(initializeSubGrid());
+		}
+
+	}
+	
+	private Container initializeSubGrid() {
+		subGrid = new GridLayout(GRID_SIZE,GRID_SIZE,0, 0);
 		numbers = new JButton[GRID_SIZE][GRID_SIZE];
 		
-		c = new Container();
-		c.setLayout(sudukoGrid);
+		subContainer = new Container();
+		subContainer.setLayout(subGrid);
+		
 		//loop through, initialize button and add to container
-		for(int row = 0; row < GRID_SIZE; row++) 
-			for(int col = 0; col < GRID_SIZE; col++) {
-				numbers[row][col] = new JButton();
-				numbers[row][col].setText(" ");
-				c.add(numbers[row][col]);
-	
-			}
+		repaint();
+		return subContainer;
 	}
+	//get main container of whole grid
 	public Container getContainer() {
-		return c;
+		return container;
+	}
+	//get sub container of sub grid
+	public Container getSubContainer() {
+		return subContainer;
 	}
 	public void setValue(int row, int col, int val) {
 		numbers[row][col].setActionCommand(Integer.toString(val));
 		numbers[row][col].setText(Integer.toString(val));
 		
 	}
+	
+	//function to repaint grid every time based on values of button
 	public void repaint() {
-		   c.removeAll();
-		   for(int row = 0; row < GRID_SIZE; row++) 
+		subContainer.removeAll();
+		   for(int row = 0; row < GRID_SIZE; row++) { 
 			for(int col = 0; col < GRID_SIZE; col++) {
 				//need to add action listener too
-				c.add(numbers[row][col]);
+				numbers[row][col] = new JButton();
+				numbers[row][col].setText(" ");
+				subContainer.add(numbers[row][col]);
 			}
-	       c.revalidate();
-	       c.repaint();
+		   }
+		   subContainer.revalidate();
+		   subContainer.repaint();
 	}
 	
 

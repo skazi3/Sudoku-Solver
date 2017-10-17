@@ -42,11 +42,13 @@ public class MyJMenuBar extends JMenuBar{
 			    try {
 
 			        Scanner sc = new Scanner(selectedFile);
-
+			        int row =0, col= 0, val = 0;
 			        while (sc.hasNextLine()) {
-			            int row = sc.nextInt();
-			            int col = sc.nextInt();
-			            int val = sc.nextInt();
+			        	if(sc.hasNextInt()) {
+			            row = sc.nextInt();
+			            col = sc.nextInt();
+			            val = sc.nextInt();
+			        	}
 			        
 			            data.add(new PuzzleData(row, col, val));
 			           
