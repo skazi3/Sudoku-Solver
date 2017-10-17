@@ -27,6 +27,21 @@ public class MyGrid{
 	public Container getContainer() {
 		return c;
 	}
+	public void setValue(int row, int col, int val) {
+		numbers[row][col].setActionCommand(Integer.toString(val));
+		numbers[row][col].setText(Integer.toString(val));
+		
+	}
+	public void repaint() {
+		   c.removeAll();
+		   for(int row = 0; row < GRID_SIZE; row++) 
+			for(int col = 0; col < GRID_SIZE; col++) {
+				//need to add action listener too
+				c.add(numbers[row][col]);
+			}
+	       c.revalidate();
+	       c.repaint();
+	}
 	
 
 }

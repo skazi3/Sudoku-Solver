@@ -1,15 +1,18 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
+
 
 public class MyJMenuBar extends JMenuBar{
 	private JMenuBar menuBar;
 	private JMenu fileMenu, helpMenu, hintsMenu; 
 	private JMenuItem loadMenuItem;
+	private ArrayList<PuzzleData> data;
+	public boolean loadClicked = false;
 	public MyJMenuBar() {
+		data = new ArrayList<PuzzleData>();
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("File");
 		helpMenu = new JMenu("Help");
@@ -31,14 +34,38 @@ public class MyJMenuBar extends JMenuBar{
 	private class loadActionListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+			JFileChooser fc = new JFileChooser("/Users/sarahkazi/Documents/cs342/project3");
 			int returnVal = fc.showOpenDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = fc.getSelectedFile();
-				System.out.println(selectedFile.getAbsolutePath());
+				loadClicked = true;
+			    try {
+
+			        Scanner sc = new Scanner(selectedFile);
+
+			        while (sc.hasNextLine()) {
+			            int row = sc.nextInt();
+			            int col = sc.nextInt();
+			            int val = sc.nextInt();
+			        
+			            data.add(new PuzzleData(row, col, val));
+			           
+			        }
+			        sc.close();
+			    } 
+			    catch (FileNotFoundException fnf) {
+			        fnf.printStackTrace();
+			    }
 			}
 		}
 		
+	}
+
+	public ArrayList<PuzzleData> getData(){
+		if(loadClicked)
+			return data;
+		else
+			return null;
 	}
 	
 }
