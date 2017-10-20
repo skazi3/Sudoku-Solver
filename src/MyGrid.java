@@ -27,8 +27,7 @@ public class MyGrid{
 			Container c = new Container();
 			c = repaint(c);
 			
-			subGrid = new GridLayout(GRID_SIZE, GRID_SIZE, 0, 0);
-			c.setLayout(subGrid);
+			
 			subContainers.add(c);
 			c.setVisible(true);
 			c.setSize(100, 100);
