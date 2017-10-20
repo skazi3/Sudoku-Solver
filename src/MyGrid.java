@@ -62,8 +62,7 @@ public class MyGrid{
 	}
 		
 	public void setVal(PuzzleData pd, Container subContainer){
-		
-		int i = 0;
+		int j = 0;
 	}
 	
 
