@@ -32,7 +32,7 @@ public class MyGrid{
 			subContainers.add(c);
 			c.setVisible(true);
 			c.setSize(100, 100);
-			container.add(repaint(c));
+			container.add(c);
 			
 		}
 		
@@ -62,11 +62,19 @@ public class MyGrid{
 		   subContainer.repaint();
 		   return subContainer;
 	}
-		
+	private int mapCoordinate(int x){
+		switch(x){
+			case 4, 7: return 1;
+			case 5, 8: return 2;
+			case 6, 9: return 3;
+			default: return x;
+		}
+	}	
 	public void setVal(PuzzleData pd, int index){
-		int row = pd.getRow();
-		int col = pd.getCol();
+		int row = mapCoordinate(pd.getRow());
+		int col = mapCoordinate(pd.getCol());
 		Container subContainer = getSubContainer(index);
+
 		//subContainer.
 		
 	}
