@@ -43,10 +43,7 @@ public class MyGrid{
 	public Container getSubContainer(int i) {
 		return subContainers.get(i);
 	}
-	public void setValue(int row, int col, int val) {
-		pd.add(new PuzzleData(row, col, val));
-		
-	}
+
 
 	//function to repaint grid every time based on values of button
 	public Container repaint(Container subContainer) {

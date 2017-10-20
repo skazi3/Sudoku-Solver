@@ -27,6 +27,7 @@ public class SudokuSolver extends JFrame{
 		c.add(hb.getPanel(), BorderLayout.EAST);
 		c.setBackground(Color.gray);
 		setJMenuBar(menuBar);
+		
 		setSize(450, 450);
 		setVisible(true);
 		
@@ -47,9 +48,11 @@ public class SudokuSolver extends JFrame{
 		loadItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadFile();
+				
 			}
 		});
 		JMenuItem storeItem = new JMenuItem("Store");
+			
 		
 		fileMenu.add(loadItem);
 		fileMenu.add(storeItem);
@@ -58,6 +61,11 @@ public class SudokuSolver extends JFrame{
 		return mb;
 		
 	}
+	private void setValues() {
+		
+	}
+	
+	//load file action listener method
 	private void loadFile() {
 		JFileChooser fc = new JFileChooser("/Users/sarahkazi/Documents/cs342/project3");
 		int returnVal = fc.showOpenDialog(null);
@@ -74,8 +82,9 @@ public class SudokuSolver extends JFrame{
 			            val = sc.nextInt();
 			        	}
 			        	pd.add(new PuzzleData(row, col, val));
-		           
+    
 		        }
+
 		        sc.close();
 		    } 
 		    catch (FileNotFoundException fnf) {
@@ -83,6 +92,7 @@ public class SudokuSolver extends JFrame{
 		    }
 
 		}
+		setValues();
 	}
 	
 	
