@@ -25,6 +25,8 @@ public class MyGrid{
 	private void initializeGrids() {
 		for(int i = 0; i < 9; i++) {
 			Container c = new Container();
+			c = repaint(c);
+			
 			subGrid = new GridLayout(GRID_SIZE, GRID_SIZE, 0, 0);
 			c.setLayout(subGrid);
 			subContainers.add(c);
@@ -61,8 +63,12 @@ public class MyGrid{
 		   return subContainer;
 	}
 		
-	public void setVal(PuzzleData pd, Container subContainer){
-		int j = 0;
+	public void setVal(PuzzleData pd, int index){
+		int row = pd.getRow();
+		int col = pd.getCol();
+		Container subContainer = getSubContainer(index);
+		//subContainer.
+		
 	}
 	
 
