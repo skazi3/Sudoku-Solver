@@ -64,9 +64,15 @@ public class MyGrid{
 	}
 	private int mapCoordinate(int x){
 		switch(x){
-			case 4, 7: return 1;
-			case 5, 8: return 2;
-			case 6, 9: return 3;
+			case 4:
+			case 7:
+			 return 1;
+			case 5:
+			case 8:
+			 return 2;
+			case 6:
+			case 9:
+			 return 3;
 			default: return x;
 		}
 	}	
