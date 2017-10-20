@@ -86,7 +86,9 @@ public class SudokuSolver extends JFrame{
 	}
 	private void setValues() {
 		for(PuzzleData d: pd) {
-			sudokuGrid.
+			int index = getContainerIndex(d.getRow(), d.getCol());
+			Container c = sudokuGrid.getSubContainer(index);
+			sudokuGrid.setVal(d, c);
 		}
 	}
 	

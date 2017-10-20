@@ -7,7 +7,7 @@ public class MyGrid{
 	private MyButton[][] numbers; 
 	private int GRID_SIZE = 3;
 	private Container container;
-	private ArrayList<PuzzleData> pd;
+	//private ArrayList<PuzzleData> pd;
 	private ArrayList<Container> subContainers;
 	
 	//constructor for the actual grid
@@ -61,6 +61,10 @@ public class MyGrid{
 		   return subContainer;
 	}
 		
+	public void setVal(PuzzleData pd, Container subContainer){
+		
+		
+	}
 	
 
 }
