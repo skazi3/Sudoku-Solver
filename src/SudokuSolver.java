@@ -9,23 +9,20 @@ public class SudokuSolver extends JFrame{
 	private GridLayout grid;
 	private int GRID_SIZE = 3;
 	private HelperButtons hb;
-	private MyJMenuBar menuBar;
+	private JMenuBar menuBar;
 	private MyGrid sudokuGrid;
 	
 	
 	public SudokuSolver() {
 		super("Suduko Solver");
 	 	hb = new HelperButtons();
-		menuBar = new MyJMenuBar();
-		
+		menuBar = returnMenuBar();
 		c = getContentPane();
 		c.setLayout(new BorderLayout());
 		c.add(makeGrid());
 		c.add(hb.getPanel(), BorderLayout.EAST);
 		c.setBackground(Color.gray);
-		
-		setJMenuBar(menuBar.getMenuBar());
-
+		setJMenuBar(menuBar);
 		setSize(450, 450);
 		setVisible(true);
 		
@@ -37,6 +34,25 @@ public class SudokuSolver extends JFrame{
 		setTitle("Sudoku Solver");
 		setVisible(true);
 		return sudokuGrid.getContainer();
+	}
+	private JMenuBar returnMenuBar() {
+		JMenuBar mb = new JMenuBar();
+		JMenu fileMenu = new JMenu("File");
+		
+		JMenuItem loadItem = new JMenuItem("Load");
+		loadItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//add load file method
+			}
+		});
+		JMenuItem storeItem = new JMenuItem("Store");
+		
+		fileMenu.add(loadItem);
+		fileMenu.add(storeItem);
+		mb.add(fileMenu);
+		
+		return mb;
+		
 	}
 	
 	
