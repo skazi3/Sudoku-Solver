@@ -7,6 +7,7 @@ public class MyGrid{
 	private MyButton[][] numbers; 
 	private int GRID_SIZE = 3;
 	private Container subContainer, container;
+	private ArrayList<PuzzleData> pd;
 	
 	//constructor for the actual grid
 	MyGrid(){
@@ -42,9 +43,32 @@ public class MyGrid{
 		return subContainer;
 	}
 	public void setValue(int row, int col, int val) {
-		numbers[row][col].setActionCommand(Integer.toString(val));
-		numbers[row][col].setText(Integer.toString(val));
+		int gridNo = getGridNo(row, col);
+		pd.add(new PuzzleData(row, col, val, gridNo));
 		
+	}
+	private int getGridNo(int row, int col) {
+		int gridNum = 0;
+		if(row>=1 && row <=3 && col >=1 && col <=3) 
+			gridNum = 1;
+		else if(row>=1 && row <=3 && col >= 4 && col <=6) 
+			gridNum = 2;
+		else if(row>=1 && row <=3 && col >= 7 && col <=9) 
+			gridNum = 3;
+		else if(row>=4 && row <=6 && col >= 1 && col <=3) 
+			gridNum = 4;
+		else if(row>=4 && row <=6 && col >= 4 && col <=6) 
+			gridNum = 5;
+		else if(row>=4 && row <=6 && col >= 7 && col <=9) 
+			gridNum = 6;
+		else if(row>=7 && row <=9 && col >= 1 && col <=3) 
+			gridNum = 7;
+		else if(row>=7 && row <=9 && col >= 4 && col <=6) 
+			gridNum = 8;
+		else if(row>=7 && row <=9 && col >= 7 && col <=9) 
+			gridNum = 9;
+		
+		return gridNum;
 	}
 	
 	//function to repaint grid every time based on values of button

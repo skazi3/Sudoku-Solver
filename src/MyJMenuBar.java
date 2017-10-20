@@ -10,10 +10,14 @@ public class MyJMenuBar extends JMenuBar{
 	private JMenu fileMenu, helpMenu, hintsMenu; 
 	private JMenuItem loadMenuItem;
 	private ArrayList<PuzzleData> data;
-	private boolean loadClicked;
+	private boolean loadClicked= true;
 	public MyJMenuBar() {
-		loadClicked = false;
+	
 		data = new ArrayList<PuzzleData>();
+		initializeMenu();
+		 
+	}
+	private void initializeMenu() {
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("File");
 		helpMenu = new JMenu("Help");
@@ -38,24 +42,22 @@ public class MyJMenuBar extends JMenuBar{
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu); 
 		menuBar.add(hintsMenu);
-		 
 	}
 	public JMenuBar getMenuBar() {
 		return menuBar;
 	}
 
 	public ArrayList<PuzzleData> getData(File sf){
-		loadClicked = true;
 		try {
 
 	        Scanner sc = new Scanner(sf);
 	        int row =0, col= 0, val = 0;
 	        while (sc.hasNextLine()) {
-	        	if(sc.hasNextInt()) {
-	            row = sc.nextInt();
-	            col = sc.nextInt();
-	            val = sc.nextInt();
-	        	}
+		        	if(sc.hasNextInt()) {
+		            row = sc.nextInt();
+		            col = sc.nextInt();
+		            val = sc.nextInt();
+		        	}
 	        		int gridNo = getGridNo(row, col);
 	            data.add(new PuzzleData(row, col, val, gridNo));
 	           
