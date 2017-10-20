@@ -6,7 +6,7 @@ public class HelperButtons {
 	private JButton[] helperButtons;
 	private GridLayout helperGrid;
 	private JPanel panel;
-	
+	 
 	public HelperButtons(){
 		Image eraser = new ImageIcon( "eraser.png" ).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
 		ImageIcon e = new ImageIcon(eraser);

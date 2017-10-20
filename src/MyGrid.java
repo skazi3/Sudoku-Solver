@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class MyGrid{
 	private GridLayout subGrid, sudokuGrid;
-	private JButton[][] numbers; 
+	private MyButton[][] numbers; 
 	private int GRID_SIZE = 3;
 	private Container subContainer, container;
 	
@@ -24,7 +24,7 @@ public class MyGrid{
 	
 	private Container initializeSubGrid() {
 		subGrid = new GridLayout(GRID_SIZE,GRID_SIZE,0, 0);
-		numbers = new JButton[GRID_SIZE][GRID_SIZE];
+		numbers = new MyButton[GRID_SIZE][GRID_SIZE];
 		
 		subContainer = new Container();
 		subContainer.setLayout(subGrid);
@@ -53,8 +53,8 @@ public class MyGrid{
 		   for(int row = 0; row < GRID_SIZE; row++) { 
 			for(int col = 0; col < GRID_SIZE; col++) {
 				//need to add action listener too
-				numbers[row][col] = new JButton();
-				numbers[row][col].setText(" ");
+				numbers[row][col] = new MyButton(" ");
+
 				subContainer.add(numbers[row][col]);
 			}
 		   }

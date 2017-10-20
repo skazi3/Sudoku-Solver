@@ -10,11 +10,12 @@ public class SudokuSolver extends JFrame{
 	private int GRID_SIZE = 3;
 	private HelperButtons hb;
 	private MyJMenuBar menuBar;
+	private MyGrid sudokuGrid;
 	
 	
 	public SudokuSolver() {
 		super("Suduko Solver");
-		hb = new HelperButtons();
+	 	hb = new HelperButtons();
 		menuBar = new MyJMenuBar();
 		
 		c = getContentPane();
@@ -24,23 +25,14 @@ public class SudokuSolver extends JFrame{
 		c.setBackground(Color.gray);
 		
 		setJMenuBar(menuBar.getMenuBar());
-		
-		//redraws suduko grid with the proper values at each row,col
-		if(menuBar.loadClicked == true) {
-			redrawGrid();
-			
-		}
+
 		setSize(450, 450);
 		setVisible(true);
 		
 	}
-	private void redrawGrid() {
-		ArrayList<PuzzleData> data = menuBar.getData();
-		
-	}
-	
+
 	private Container makeGrid() {
-		MyGrid sudokuGrid = new MyGrid();
+		sudokuGrid = new MyGrid();
 		setSize(400, 400);
 		setTitle("Sudoku Solver");
 		setVisible(true);
