@@ -61,8 +61,33 @@ public class SudokuSolver extends JFrame{
 		return mb;
 		
 	}
-	private void setValues() {
+	private int getContainerIndex(int row, int col) {
+		if(row <= 3 && row >= 1 && col <= 3 && col >=1) 
+			return 0;
+		else if(row <= 3 && row >= 1 && col <= 6 && col >=4) 
+			return 1;
+		else if(row <= 3 && row >= 1 && col <= 9 && col >=7) 
+			return 2;
+		else if(row <= 6 && row >= 4 && col <= 3 && col >=1) 
+			return 3;	
+		else if(row <= 6 && row >= 4 && col <= 6 && col >=4) 
+			return 4;
+		else if(row <= 6 && row >= 4 && col <= 9 && col >=7) 
+			return 5;
+		else if(row <= 9 && row >= 7 && col <= 3 && col >=1) 
+			return 6;	
+		else if(row <= 9 && row >= 7 && col <= 6 && col >=4) 
+			return 7;
+		else if(row <= 9 && row >= 7 && col <= 9 && col >=7) 
+			return 8;
 		
+		return -1;
+		
+	}
+	private void setValues() {
+		for(PuzzleData d: pd) {
+			sudokuGrid.
+		}
 	}
 	
 	//load file action listener method
