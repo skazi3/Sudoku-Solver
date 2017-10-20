@@ -4,12 +4,12 @@ public class PuzzleData {
 	private int row;
 	private int col;
 	private int val;
-	private int gridNo;
-	public PuzzleData(int r, int c, int v, int g) {
+
+	public PuzzleData(int r, int c, int v) {
 		row = r;
 		col = c;
 		val = v;
-		gridNo = g;
+
 	}
 	public int getRow() {
 		return row;
@@ -20,8 +20,6 @@ public class PuzzleData {
 	public int getVal() {
 		return val;
 	}
-	public int getGridNo() {
-		return gridNo;
-	}
+
 	
 }

@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 import javax.swing.*;
 
@@ -11,10 +13,12 @@ public class SudokuSolver extends JFrame{
 	private HelperButtons hb;
 	private JMenuBar menuBar;
 	private MyGrid sudokuGrid;
+	private ArrayList<PuzzleData> pd;
 	
 	
 	public SudokuSolver() {
 		super("Suduko Solver");
+		pd = new ArrayList<PuzzleData>();
 	 	hb = new HelperButtons();
 		menuBar = returnMenuBar();
 		c = getContentPane();
@@ -42,7 +46,7 @@ public class SudokuSolver extends JFrame{
 		JMenuItem loadItem = new JMenuItem("Load");
 		loadItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//add load file method
+				loadFile();
 			}
 		});
 		JMenuItem storeItem = new JMenuItem("Store");
@@ -53,6 +57,32 @@ public class SudokuSolver extends JFrame{
 		
 		return mb;
 		
+	}
+	private void loadFile() {
+		JFileChooser fc = new JFileChooser("/Users/sarahkazi/Documents/cs342/project3");
+		int returnVal = fc.showOpenDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File sf = fc.getSelectedFile();
+			try {
+
+		        Scanner sc = new Scanner(sf);
+		        int row =0, col= 0, val = 0;
+		        while (sc.hasNextLine()) {
+			        	if(sc.hasNextInt()) {
+			            row = sc.nextInt();
+			            col = sc.nextInt();
+			            val = sc.nextInt();
+			        	}
+			        	pd.add(new PuzzleData(row, col, val));
+		           
+		        }
+		        sc.close();
+		    } 
+		    catch (FileNotFoundException fnf) {
+		        fnf.printStackTrace();
+		    }
+
+		}
 	}
 	
 	
