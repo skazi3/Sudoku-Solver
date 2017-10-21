@@ -93,7 +93,7 @@ public class SudokuSolver extends JFrame{
 	
 	//load file action listener method
 	private void loadFile() {
-		this.removeAll();
+		
 		JFileChooser fc = new JFileChooser("/Users/sarahkazi/Documents/cs342/project3");
 		int returnVal = fc.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
