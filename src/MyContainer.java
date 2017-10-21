@@ -20,20 +20,23 @@ public class MyContainer extends Container {
 		}	
 		
 		setVisible(true);
-		setSize(100, 100);
+		setSize(200, 200);
 		
 	}
 	
-	public void updateButtons(MyButton[][] buttons){
+	public void updateButtons(){
 		
 		removeAll();
 		for(int row = 0; row < GRID_SIZE; row++) { 
 			for(int col = 0; col < GRID_SIZE; col++) {
-				numbers[row][col] = buttons[row][col];
 				add(numbers[row][col]);
 			}
 		}	
 	}
 	
+	public void addButtonValue(int value, int row, int col){
+		numbers[row-1][col-1].setText(Integer.toString(value));
+		updateButtons();
+	}
 	
 }

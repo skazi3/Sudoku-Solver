@@ -48,7 +48,7 @@ public class SudokuSolver extends JFrame{
 		loadItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadFile();
-				
+				repaint();
 			}
 		});
 		JMenuItem storeItem = new JMenuItem("Store");

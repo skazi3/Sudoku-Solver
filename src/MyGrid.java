@@ -68,7 +68,7 @@ public class MyGrid{
 		int col = mapCoordinate(pd.getCol());
 		MyContainer subContainer = getSubContainer(index);
 		
-		subContainer.up
+		subContainer.addButtonValue(pd.getVal(), row, col);
 		
 	}
 	
