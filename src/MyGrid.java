@@ -7,7 +7,6 @@ public class MyGrid{
 	private MyButton[][] nineGrid; 
 	private int GRID_SIZE = 3;
 	private Container container;
-	//private ArrayList<PuzzleData> pd;
 	private ArrayList<MyContainer> subContainers;
 	
 	//constructor for the actual grid
@@ -23,6 +22,10 @@ public class MyGrid{
 	}
 	
 	private void initializeGrids() {
+		for(int j = 0; j < GRID_SIZE*3; j++)
+			for(int k = 0; k < GRID_SIZE*3; k++){
+				nineGrid[j][k] = new MyButton(" ");
+			}
 		for(int i = 0; i < 9; i++) {
 			MyContainer c = new MyContainer();
 			repaint(c);
@@ -63,7 +66,7 @@ public class MyGrid{
 		}
 	}	
 	public void setVal(PuzzleData pd, int index){
-
+		nineGrid[pd.getRow()-1][pd.getCol()-1]
 		int row = mapCoordinate(pd.getRow());
 		int col = mapCoordinate(pd.getCol());
 		MyContainer subContainer = getSubContainer(index);
