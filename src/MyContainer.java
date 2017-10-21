@@ -19,8 +19,21 @@ public class MyContainer extends Container {
 			}
 		}	
 		
+		setVisible(true);
+		setSize(100, 100);
+		
 	}
 	
+	public void updateButtons(MyButton[][] buttons){
+		
+		removeAll();
+		for(int row = 0; row < GRID_SIZE; row++) { 
+			for(int col = 0; col < GRID_SIZE; col++) {
+				numbers[row][col] = buttons[row][col];
+				add(numbers[row][col]);
+			}
+		}	
+	}
 	
 	
 }

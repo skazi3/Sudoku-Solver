@@ -8,12 +8,12 @@ public class MyGrid{
 	private int GRID_SIZE = 3;
 	private Container container;
 	//private ArrayList<PuzzleData> pd;
-	private ArrayList<Container> subContainers;
+	private ArrayList<MyContainer> subContainers;
 	
 	//constructor for the actual grid
 	MyGrid(){
 		numbers = new MyButton[GRID_SIZE][GRID_SIZE];
-		subContainers = new ArrayList<Container>(9);
+		subContainers = new ArrayList<MyContainer>(9);
 		sudokuGrid = new GridLayout(GRID_SIZE,GRID_SIZE, 3,3);
 		container = new Container();
 		container.setLayout(sudokuGrid);
@@ -24,13 +24,9 @@ public class MyGrid{
 	
 	private void initializeGrids() {
 		for(int i = 0; i < 9; i++) {
-			Container c = new Container();
-			c = repaint(c);
-			
-			
+			MyContainer c = new MyContainer();
+			repaint(c);
 			subContainers.add(c);
-			c.setVisible(true);
-			c.setSize(100, 100);
 			container.add(c);
 			
 		}
@@ -41,25 +37,17 @@ public class MyGrid{
 		return container;
 	}
 	//get sub container of sub grid
-	public Container getSubContainer(int i) {
+	public MyContainer getSubContainer(int i) {
 		return subContainers.get(i);
 	}
 
 
 	//function to repaint grid every time based on values of button
-	public Container repaint(Container subContainer) {
-		subContainer.removeAll();
-		   for(int row = 0; row < GRID_SIZE; row++) { 
-			for(int col = 0; col < GRID_SIZE; col++) {
-				//need to add action listener too
-				numbers[row][col] = new MyButton(" ");
-				
-				subContainer.add(numbers[row][col]);
-			}
-		   }
+	public void repaint(MyContainer subContainer) {
+		
 		   subContainer.revalidate();
 		   subContainer.repaint();
-		   return subContainer;
+		   
 	}
 	private int mapCoordinate(int x){
 		switch(x){
@@ -78,9 +66,9 @@ public class MyGrid{
 	public void setVal(PuzzleData pd, int index){
 		int row = mapCoordinate(pd.getRow());
 		int col = mapCoordinate(pd.getCol());
-		Container subContainer = getSubContainer(index);
-
-		//subContainer.
+		MyContainer subContainer = getSubContainer(index);
+		
+		subContainer.up
 		
 	}
 	
