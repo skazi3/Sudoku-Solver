@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class MyGrid{
 	private GridLayout subGrid, sudokuGrid;
-	private MyButton[][] numbers; 
+	private MyButton[][] nineGrid; 
 	private int GRID_SIZE = 3;
 	private Container container;
 	//private ArrayList<PuzzleData> pd;
@@ -12,8 +12,8 @@ public class MyGrid{
 	
 	//constructor for the actual grid
 	MyGrid(){
-		numbers = new MyButton[GRID_SIZE][GRID_SIZE];
-		subContainers = new ArrayList<MyContainer>(9);
+		nineGrid = new MyButton[GRID_SIZE*3][GRID_SIZE*3];
+		subContainers = new ArrayList<MyContainer>(GRID_SIZE);
 		sudokuGrid = new GridLayout(GRID_SIZE,GRID_SIZE, 3,3);
 		container = new Container();
 		container.setLayout(sudokuGrid);
@@ -41,7 +41,6 @@ public class MyGrid{
 		return subContainers.get(i);
 	}
 
-
 	//function to repaint grid every time based on values of button
 	public void repaint(MyContainer subContainer) {
 		
@@ -64,6 +63,7 @@ public class MyGrid{
 		}
 	}	
 	public void setVal(PuzzleData pd, int index){
+
 		int row = mapCoordinate(pd.getRow());
 		int col = mapCoordinate(pd.getCol());
 		MyContainer subContainer = getSubContainer(index);
