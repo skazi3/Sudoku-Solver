@@ -1,9 +1,17 @@
+//MyButton extends JButton and has an additional
+//hasVal condition that checks if there is a value
+//at given button in array or not
+
 import javax.swing.*;
 
 public class MyButton extends JButton{
 	private boolean hasValue;
 	public MyButton(String text) {
 		super(text);
+		hasValue = false;
+	}
+	public MyButton(ImageIcon e) {
+		super(e);
 		hasValue = false;
 	}
 	 
@@ -14,7 +22,6 @@ public class MyButton extends JButton{
 		hasValue = y;
 	}
 	public int getVal() {
-		System.out.println(getActionCommand());
 		return Integer.parseInt(getActionCommand());
 	}
 

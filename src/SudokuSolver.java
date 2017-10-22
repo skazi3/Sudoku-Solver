@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
-
+//main class that starts off the game and initializes jframe
 public class SudokuSolver extends JFrame{
 	private Container c;
 	private GridLayout grid;
@@ -14,7 +14,7 @@ public class SudokuSolver extends JFrame{
 	private MyGrid sudokuGrid;
 	private ArrayList<PuzzleData> loadedPuzzle, storedPuzzle;
 	
-	
+	//constructor to add everything to container c
 	public SudokuSolver() {
 		super("Suduko Solver");
 		loadedPuzzle = new ArrayList<PuzzleData>();
@@ -33,6 +33,7 @@ public class SudokuSolver extends JFrame{
 		
 	}
 
+	//make the myGrid (which contains subgrids and ninegrid
 	private Container makeGrid() {
 		sudokuGrid = new MyGrid();
 		setSize(400, 400);
@@ -40,10 +41,13 @@ public class SudokuSolver extends JFrame{
 		setVisible(true);
 		return sudokuGrid.getContainer();
 	}
+	
+	//create menu bar with actions
 	private JMenuBar returnMenuBar() {
 		JMenuBar mb = new JMenuBar();
 		JMenu fileMenu = new JMenu("File");
 		JMenu helpMenu = new JMenu("Help");
+		JMenu hintsMenu = new JMenu("Hints");
 		
 		//file menu items
 		JMenuItem loadItem = new JMenuItem("Load");
@@ -96,6 +100,9 @@ public class SudokuSolver extends JFrame{
 			}
 		});
 		
+		//hints menu items
+		
+		
 		fileMenu.add(loadItem);
 		fileMenu.add(storeItem);
 		fileMenu.add(exitItem);
@@ -107,10 +114,13 @@ public class SudokuSolver extends JFrame{
 		
 		mb.add(fileMenu);
 		mb.add(helpMenu);
+		mb.add(hintsMenu);
 		
 		return mb;
 		
 	}
+	//returns the index of a container based on its 
+	//position on the nine grid
 	private int getContainerIndex(int row, int col) {
 		if(row <= 3 && row >= 1 && col <= 3 && col >=1) 
 			return 0;
@@ -134,6 +144,7 @@ public class SudokuSolver extends JFrame{
 		return -1;
 		
 	}
+	//actually set the value sent in to the container
 	private void setValues() {
 		for(PuzzleData d: loadedPuzzle) {
 			int index = getContainerIndex(d.getRow(), d.getCol());
@@ -149,7 +160,7 @@ public class SudokuSolver extends JFrame{
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File sf = fc.getSelectedFile();
 			try {
-
+				//store into puzzle data
 		        Scanner sc = new Scanner(sf);
 		        int row =0, col= 0, val = 0;
 		        while (sc.hasNextLine()) {
@@ -161,7 +172,6 @@ public class SudokuSolver extends JFrame{
 			        	loadedPuzzle.add(new PuzzleData(row, col, val));
     
 		        }
-
 		        sc.close();
 		    } 
 		    catch (FileNotFoundException fnf) {
@@ -169,11 +179,13 @@ public class SudokuSolver extends JFrame{
 		    }
 
 		}
+		//call set values
 		setValues();
 	}
+	//function to write a puzzle to a file
 	public void storeFile() {
 		storedPuzzle = sudokuGrid.getStoredPuzzle();
-		
+		//surround file writer by try and catch
 		try {
 			PrintWriter writer = new PrintWriter("storedPuzzleData.txt", "UTF-8");
 			for(PuzzleData d: storedPuzzle) {
