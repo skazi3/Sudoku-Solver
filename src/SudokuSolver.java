@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -13,12 +12,13 @@ public class SudokuSolver extends JFrame{
 	private HelperButtons hb;
 	private JMenuBar menuBar;
 	private MyGrid sudokuGrid;
-	private ArrayList<PuzzleData> pd;
+	private ArrayList<PuzzleData> loadedPuzzle, storedPuzzle;
 	
 	
 	public SudokuSolver() {
 		super("Suduko Solver");
-		pd = new ArrayList<PuzzleData>();
+		loadedPuzzle = new ArrayList<PuzzleData>();
+		storedPuzzle = new ArrayList<PuzzleData>();
 	 	hb = new HelperButtons();
 		menuBar = returnMenuBar();
 		c = getContentPane();
@@ -52,7 +52,11 @@ public class SudokuSolver extends JFrame{
 			}
 		});
 		JMenuItem storeItem = new JMenuItem("Store");
-			
+		storeItem.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				storeFile();
+			}
+		});
 		
 		fileMenu.add(loadItem);
 		fileMenu.add(storeItem);
@@ -85,7 +89,7 @@ public class SudokuSolver extends JFrame{
 		
 	}
 	private void setValues() {
-		for(PuzzleData d: pd) {
+		for(PuzzleData d: loadedPuzzle) {
 			int index = getContainerIndex(d.getRow(), d.getCol());
 			sudokuGrid.setVal(d, index);
 		}
@@ -94,7 +98,7 @@ public class SudokuSolver extends JFrame{
 	//load file action listener method
 	private void loadFile() {
 		
-		JFileChooser fc = new JFileChooser("/Users/sarahkazi/Documents/cs342/project3");
+		JFileChooser fc = new JFileChooser("/Users/sarahkazi/Documents/cs342/Sudoku-Solver");
 		int returnVal = fc.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File sf = fc.getSelectedFile();
@@ -108,7 +112,7 @@ public class SudokuSolver extends JFrame{
 			            col = sc.nextInt();
 			            val = sc.nextInt();
 			        	}
-			        	pd.add(new PuzzleData(row, col, val));
+			        	loadedPuzzle.add(new PuzzleData(row, col, val));
     
 		        }
 
@@ -120,6 +124,23 @@ public class SudokuSolver extends JFrame{
 
 		}
 		setValues();
+	}
+	public void storeFile() {
+		storedPuzzle = sudokuGrid.getStoredPuzzle();
+		
+		try {
+			PrintWriter writer = new PrintWriter("storedPuzzleData.txt", "UTF-8");
+			for(PuzzleData d: storedPuzzle) {
+				writer.println(d.getRow() + " " + d.getCol() + " " + d.getVal());
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	

@@ -13,5 +13,9 @@ public class MyButton extends JButton{
 	public void setHasVal(boolean y) {
 		hasValue = y;
 	}
+	public int getVal() {
+		System.out.println(getActionCommand());
+		return Integer.parseInt(getActionCommand());
+	}
 
 }
