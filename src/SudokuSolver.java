@@ -43,7 +43,9 @@ public class SudokuSolver extends JFrame{
 	private JMenuBar returnMenuBar() {
 		JMenuBar mb = new JMenuBar();
 		JMenu fileMenu = new JMenu("File");
+		JMenu helpMenu = new JMenu("Help");
 		
+		//file menu items
 		JMenuItem loadItem = new JMenuItem("Load");
 		loadItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -63,10 +65,48 @@ public class SudokuSolver extends JFrame{
 				dispose();
 			}
 		});
+		
+		//help menu items
+		JMenuItem aboutSudoku = new JMenuItem("About Sudoku");
+		aboutSudoku.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				JOptionPane.showMessageDialog(null,
+		    		    "How Sudoku works!:",
+		    		    "About Sudoku",
+		    		    JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		JMenuItem aboutGame = new JMenuItem("About the Interface");
+		aboutGame.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				JOptionPane.showMessageDialog(null,
+		    		    "How our interface works!:",
+		    		    "About the Interface",
+		    		    JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		JMenuItem aboutProgrammers = new JMenuItem("About the Writers");
+		aboutProgrammers.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				JOptionPane.showMessageDialog(null,
+		    		    "This game was coded by: \nSarah Kazi: skazi3\n"
+		    		    + "Zaynab Almoujahed: \nKayla Condrella: \n",
+		    		    "About Us!",
+		    		    JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		
 		fileMenu.add(loadItem);
 		fileMenu.add(storeItem);
 		fileMenu.add(exitItem);
+		
+		helpMenu.add(aboutSudoku);
+		helpMenu.add(aboutGame);
+		helpMenu.add(aboutProgrammers);
+		
+		
 		mb.add(fileMenu);
+		mb.add(helpMenu);
 		
 		return mb;
 		
