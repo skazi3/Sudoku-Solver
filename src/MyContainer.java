@@ -1,10 +1,11 @@
 import java.awt.*;
+import java.awt.event.*;
 
 
 public class MyContainer extends Container {
 	
 	private int GRID_SIZE = 3;
-	private MyButton[][] numbers; 
+	private MyButton[][] numbers;
 	
 	public MyContainer(){
 		numbers = new MyButton[3][3];
@@ -15,6 +16,12 @@ public class MyContainer extends Container {
 		for(int row = 0; row < GRID_SIZE; row++) { 
 			for(int col = 0; col < GRID_SIZE; col++) {
 				numbers[row][col] = new MyButton(" ");
+				numbers[row][col].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						//check if there is a helper button selected when grid
+						//button is clicked then place it there
+					}
+				});
 				add(numbers[row][col]);
 			}
 		}	
