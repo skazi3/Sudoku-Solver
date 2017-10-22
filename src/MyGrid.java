@@ -4,10 +4,11 @@ import javax.swing.*;
 
 public class MyGrid{
 	private GridLayout subGrid, sudokuGrid;
-	private MyButton[][] nineGrid; 
-	private int GRID_SIZE = 3;
 	private Container container;
 	private ArrayList<MyContainer> subContainers;
+	private MyButton[][] nineGrid; 
+	private int GRID_SIZE = 3;
+
 	
 	//constructor for the actual grid,
 	//initialize overarching grids
@@ -45,13 +46,17 @@ public class MyGrid{
 	public MyContainer getSubContainer(int i) {
 		return subContainers.get(i);
 	}
-
 	//function to repaint grid every time based on values of button
 	public void repaint(MyContainer subContainer) {
 		
 		   subContainer.revalidate();
 		   subContainer.repaint();
 		   
+	}
+	public void setCur(MyButton cur) {
+		for(int i = 0; i < 9; i++) {
+			subContainers.get(i).setCurrentButton(cur);
+		}
 	}
 	//map a 9x9 grid to a 3x3 to store in subcontainer
 	private int mapCoordinate(int x){
@@ -68,6 +73,7 @@ public class MyGrid{
 			default: return x;
 		}
 	}
+	
 	//actually set fixed candidates onto grid
 	public void setVal(PuzzleData pd, int index){
 		//add to nine grid
@@ -80,11 +86,13 @@ public class MyGrid{
 		subContainer.addButtonValue(pd.getVal(), row, col);
 		
 	}
+	
 	//add button value to nine grid and set has value to true
 	private void addNineGridButton(int row, int col, int val) {
 		nineGrid[row][col].setActionCommand(Integer.toString(val));
 		nineGrid[row][col].setHasVal(true);
 	}
+	
 	//store current puzzle into a file if the nine grid has a 
 	//button with a value in it
 	public ArrayList<PuzzleData> getStoredPuzzle() {

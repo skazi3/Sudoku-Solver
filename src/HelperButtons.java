@@ -11,23 +11,26 @@ public class HelperButtons {
 	private MyButton currentButton;
 	 
 	public HelperButtons(){
-		Image eraser = new ImageIcon( "eraser.png" ).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
-		ImageIcon e = new ImageIcon(eraser);
+		
+		
 		helperButtons = new MyButton[10];
 		helperGrid = new GridLayout(10, 1, 0, 0);
+		currentButton = new MyButton(" ");
 		
 		panel = new JPanel(helperGrid, false);
-
-		
 		for(int i = 0; i < 9; i++){
 			helperButtons[i] = new MyButton(Integer.toString(i+1));
 			helperButtons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					chooseCurrentButton((MyButton)e.getSource());
+					setCurrentButton((MyButton)e.getSource());
 				}
 			});
 			panel.add(helperButtons[i]);
 		}
+		
+		Image eraser = new ImageIcon( "eraser.png" ).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+		ImageIcon e = new ImageIcon(eraser);
+		
 		helperButtons[9] = new MyButton(e);
 		helperButtons[9].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -43,13 +46,15 @@ public class HelperButtons {
 	public JPanel getPanel() {
 		return panel;
 	}
-	private void chooseCurrentButton(MyButton b1) {
+	private void setCurrentButton(MyButton b1) {
 		currentButton.setHasVal(true);
 		currentButton = b1;
 		
+		
 	}
-	public int getCurrentButton() {
-		return Integer.parseInt(currentButton.getActionCommand());
+	public MyButton getCurrentButton() {
+		System.out.println("Current: " + currentButton.getActionCommand());
+		return currentButton;
 	}
 	
 	private void eraserChosen() {

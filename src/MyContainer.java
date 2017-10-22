@@ -6,6 +6,7 @@ public class MyContainer extends Container {
 	
 	private int GRID_SIZE = 3;
 	private MyButton[][] numbers;
+	private MyButton currentButton;
 	
 	public MyContainer(){
 		numbers = new MyButton[3][3];
@@ -18,8 +19,7 @@ public class MyContainer extends Container {
 				numbers[row][col] = new MyButton(" ");
 				numbers[row][col].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//check if there is a helper button selected when grid
-						//button is clicked then place it there
+						storeHelperButton((MyButton)e.getSource());
 					}
 				});
 				add(numbers[row][col]);
@@ -30,7 +30,16 @@ public class MyContainer extends Container {
 		setSize(200, 200);
 		
 	}
-	
+	private void storeHelperButton(MyButton b) {
+		if(currentButton.hasVal()) {
+			b.setText(currentButton.getText());
+			b.setHasVal(true);
+		}
+	}
+	public void setCurrentButton(MyButton b) {
+		currentButton = b;
+		currentButton.setHasVal(true);
+	}
 	public void updateButtons(){
 		
 		removeAll();
@@ -40,6 +49,7 @@ public class MyContainer extends Container {
 			}
 		}	
 	}
+	
 	
 	public void addButtonValue(int value, int row, int col){
 		numbers[row-1][col-1].setText(Integer.toString(value));
