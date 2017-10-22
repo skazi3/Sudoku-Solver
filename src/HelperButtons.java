@@ -46,11 +46,9 @@ public class HelperButtons {
 	public JPanel getPanel() {
 		return panel;
 	}
-	private void setCurrentButton(MyButton b1) {
+	public void setCurrentButton(MyButton b1) {
 		currentButton.setHasVal(true);
 		currentButton = b1;
-		
-		
 	}
 	public MyButton getCurrentButton() {
 		System.out.println("Current: " + currentButton.getActionCommand());
