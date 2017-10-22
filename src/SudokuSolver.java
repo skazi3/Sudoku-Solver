@@ -57,9 +57,15 @@ public class SudokuSolver extends JFrame{
 				storeFile();
 			}
 		});
-		
+		JMenuItem exitItem = new JMenuItem("Exit");
+		exitItem.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				dispose();
+			}
+		});
 		fileMenu.add(loadItem);
 		fileMenu.add(storeItem);
+		fileMenu.add(exitItem);
 		mb.add(fileMenu);
 		
 		return mb;
