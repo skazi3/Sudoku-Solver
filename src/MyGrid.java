@@ -78,6 +78,9 @@ public class MyGrid{
 		System.out.println("Current: " + currentButton.getActionCommand());
 		return currentButton;
 	}
+	public String getCurrentButtonLabel() {
+		return "current button:" + currentButton.getActionCommand();
+	}
 	
 	private void eraserChosen() {
 		

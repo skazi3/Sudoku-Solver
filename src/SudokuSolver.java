@@ -11,6 +11,7 @@ public class SudokuSolver extends JFrame{
 	private int GRID_SIZE = 3;
 	private JMenuBar menuBar;
 	private MyGrid sudokuGrid;
+	private JLabel curLabel;
 	private ArrayList<PuzzleData> loadedPuzzle, storedPuzzle;
 
 	
@@ -36,6 +37,8 @@ public class SudokuSolver extends JFrame{
 	//make the myGrid (which contains subgrids and ninegrid
 	private Container makeGrid() {
 		sudokuGrid = new MyGrid();
+		curLabel = new JLabel(sudokuGrid.getCurrentButtonLabel());
+
 		setSize(400, 400);
 		setTitle("Sudoku Solver");
 		setVisible(true);
