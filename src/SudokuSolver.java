@@ -9,7 +9,6 @@ public class SudokuSolver extends JFrame{
 	private Container c;
 	private GridLayout grid;
 	private int GRID_SIZE = 3;
-	private HelperButtons hb;
 	private JMenuBar menuBar;
 	private MyGrid sudokuGrid;
 	private ArrayList<PuzzleData> loadedPuzzle, storedPuzzle;
@@ -20,12 +19,12 @@ public class SudokuSolver extends JFrame{
 		super("Suduko Solver");
 		loadedPuzzle = new ArrayList<PuzzleData>();
 		storedPuzzle = new ArrayList<PuzzleData>();
-	 	hb = new HelperButtons();
 		menuBar = returnMenuBar();
 		c = getContentPane();
 		c.setLayout(new BorderLayout());
-		c.add(makeGrid());
-		c.add(hb.getPanel(), BorderLayout.EAST);
+		Container sudokuContainer = makeGrid();
+		c.add(sudokuContainer);
+		c.add(sudokuGrid.getPanel(), BorderLayout.EAST);
 		c.setBackground(Color.gray);
 		setJMenuBar(menuBar);
 		

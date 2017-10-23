@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -9,19 +10,80 @@ public class MyGrid{
 	private MyButton[][] nineGrid; 
 	private int GRID_SIZE = 3;
 
+	//helper buttons
+	private MyButton[] helperButtons;
+	private GridLayout helperGrid;
+	private JPanel panel;
+	private MyButton currentButton;
+
 	
 	//constructor for the actual grid,
 	//initialize overarching grids
 	MyGrid(){
+		//helper buttons
+		helperButtons = new MyButton[10];
+		initializeHelperButtons();
+		//actual grid
 		nineGrid = new MyButton[GRID_SIZE*3][GRID_SIZE*3];
 		subContainers = new ArrayList<MyContainer>(GRID_SIZE);
 		sudokuGrid = new GridLayout(GRID_SIZE,GRID_SIZE, 3,3);
 		container = new Container();
 		container.setLayout(sudokuGrid);
 
+
 		initializeGrids();
 
 	}
+	private void initializeHelperButtons(){
+		helperGrid = new GridLayout(10, 1, 0, 0);
+		currentButton = new MyButton(" ");
+
+		panel = new JPanel(helperGrid, false);
+		for(int i = 0; i < 9; i++){
+			helperButtons[i] = new MyButton(Integer.toString(i+1));
+			helperButtons[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					setCurrentButton((MyButton)e.getSource());
+					setCur((MyButton)e.getSource());
+				}
+			});
+			panel.add(helperButtons[i]);
+		}
+		
+		Image eraser = new ImageIcon( "eraser.png" ).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+		ImageIcon e = new ImageIcon(eraser);
+		
+		helperButtons[9] = new MyButton(e);
+		helperButtons[9].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				eraserChosen();
+			}
+		});
+		panel.add(helperButtons[9]);
+		panel.setBackground(Color.LIGHT_GRAY);
+
+	}
+	//functions for helper buttons
+	public MyButton getButton(int i) {
+		return helperButtons[i];
+	}
+	public JPanel getPanel() {
+		return panel;
+	}
+	public void setCurrentButton(MyButton b1) {
+		currentButton.setHasVal(true);
+		currentButton = b1;
+	}
+	public MyButton getCurrentButton() {
+		System.out.println("Current: " + currentButton.getActionCommand());
+		return currentButton;
+	}
+	
+	private void eraserChosen() {
+		
+	}
+
+	//functions for grid
 	//initialize subContainers
 	private void initializeGrids() {
 		for(int j = 0; j < GRID_SIZE*3; j++)
