@@ -7,10 +7,11 @@ public class MyContainer extends Container {
 	private int GRID_SIZE = 3;
 	private MyButton[][] numbers;
 	private MyButton currentButton;
+	private boolean eraserChosen;
 	
 	public MyContainer(){
 		numbers = new MyButton[3][3];
-		
+		eraserChosen = false;
 		GridLayout subGrid = new GridLayout(GRID_SIZE, GRID_SIZE, 0, 0);
 		setLayout(subGrid);
 		
@@ -31,7 +32,11 @@ public class MyContainer extends Container {
 		
 	}
 	private void storeHelperButton(MyButton b) {
-		if(currentButton.hasVal()) {
+		if(b.hasVal() && eraserChosen == true) {
+			b.setText(" ");
+			b.setHasVal(false);
+		}
+		else if(currentButton.hasVal()) {
 			b.setText(currentButton.getText());
 			b.setHasVal(true);
 		}
@@ -39,6 +44,9 @@ public class MyContainer extends Container {
 	public void setCurrentButton(MyButton b) {
 		currentButton = b;
 		currentButton.setHasVal(true);
+	}
+	public void setEraserChosen(boolean isChosen) {
+		eraserChosen = isChosen;
 	}
 	public void updateButtons(){
 		

@@ -83,7 +83,9 @@ public class MyGrid{
 	}
 	
 	private void eraserChosen() {
-		
+		for(int i = 0; i < GRID_SIZE*3; i++) {
+			subContainers.get(i).setEraserChosen(true);
+		}
 	}
 
 	//functions for grid
