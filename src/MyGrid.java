@@ -22,8 +22,8 @@ public class MyGrid{
 	//initialize overarching grids
 	MyGrid(){
 		//helper buttons
-		digits = new MyButton[10];
-		initializedigits();
+		digits = new MyButton[11];
+		initializeDigits();
 		//actual grid
 		nineGrid = new MyButton[GRID_SIZE*3][GRID_SIZE*3];
 		subContainers = new ArrayList<MyContainer>(GRID_SIZE);
@@ -35,8 +35,13 @@ public class MyGrid{
 		initializeGrids();
 
 	}
+<<<<<<< HEAD
 	private void initializedigits(){
 		digitGrid = new GridLayout(12, 1, 0, 0);
+=======
+	private void initializeDigits(){
+		digitGrid = new GridLayout(10, 1, 0, 0);
+>>>>>>> aa4c2ab535be23f0953d0eaf3a1bb790223a9134
 		currentButton = new MyButton(" ", false);
 
 		panel = new JPanel(digitGrid, false);
@@ -53,6 +58,7 @@ public class MyGrid{
 			
 		}
 		
+		
 		Image eraser = new ImageIcon( "eraser.png" ).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
 		ImageIcon e = new ImageIcon(eraser);
 		
@@ -62,7 +68,9 @@ public class MyGrid{
 				eraserChosen();
 			}
 		});
+		digits[10] = new MyButton("?", false);
 		panel.add(digits[9]);
+		panel.add(digits[10]);
 		panel.setBackground(Color.LIGHT_GRAY);
 		
 		curLabel = new JLabel(getCurrentButtonLabel());
