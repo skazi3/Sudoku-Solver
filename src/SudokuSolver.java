@@ -28,7 +28,9 @@ public class SudokuSolver extends JFrame{
 		c.add(sudokuGrid.getPanel(), BorderLayout.EAST);
 		c.setBackground(Color.gray);
 		setJMenuBar(menuBar);
-		
+		curLabel = new JLabel(sudokuGrid.getCurrentButtonLabel());
+		curLabel.setForeground(Color.white);
+		c.add(curLabel, BorderLayout.SOUTH);
 		setSize(450, 450);
 		setVisible(true);
 		
