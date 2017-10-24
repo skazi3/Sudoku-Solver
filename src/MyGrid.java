@@ -37,16 +37,10 @@ public class MyGrid{
 		initializeGrids();
 
 	}
-<<<<<<< HEAD
 	private void initializeDigits(){
 		digitGrid = new GridLayout(12, 1, 0, 0);
 
-=======
 
-	//_______________________________________________________________________//
-	private void initializeDigits(){
-		digitGrid = new GridLayout(11, 1, 0, 0);
->>>>>>> b6075d1a58c780bdb3772525e8eaa9034d863254
 		currentButton = new MyButton(" ", false);
 		panel = new JPanel(digitGrid, false);
 		
