@@ -35,7 +35,11 @@ public class MyGrid{
 		initializeGrids();
 
 	}
+<<<<<<< HEAD
 	//_______________________________________________________________________//
+=======
+
+>>>>>>> 8e7c96233bfb4d8605d0e22e45b3c267d588a679
 	private void initializeDigits(){
 		digitGrid = new GridLayout(12, 1, 0, 0);
 

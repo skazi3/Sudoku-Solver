@@ -3,10 +3,12 @@
 //at given button in array or not
 
 import javax.swing.*;
+import java.util.*;
 
 public class MyButton extends JButton{
 	private boolean hasValue;
 	private boolean isFixedCandidate;
+	private ArrayList<Integer> candidates;
 	public MyButton(String text, boolean isFixed) {
 		super(text);
 		hasValue = false;
