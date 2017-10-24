@@ -53,6 +53,7 @@ public class MyContainer extends Container {
 		currentButton = b;
 		currentButton.setHasVal(true);
 		currentButtonChosen = true;
+		eraserChosen = false;
 	}
 	public void setEraserChosen(boolean isChosen) {
 		eraserChosen = isChosen;
