@@ -14,7 +14,7 @@ public class SudokuSolver extends JFrame{
 	private JLabel curLabel;
 	private ArrayList<PuzzleData> loadedPuzzle, storedPuzzle;
 
-	
+	//_______________________________________________________________________//
 	//constructor to add everything to container c
 	public SudokuSolver() {
 		super("Suduko Solver");
@@ -26,14 +26,15 @@ public class SudokuSolver extends JFrame{
 		Container sudokuContainer = makeGrid();
 		c.add(sudokuContainer);
 		c.add(sudokuGrid.getPanel(), BorderLayout.EAST);
-		c.setBackground(Color.gray);
+		c.add(sudokuGrid.getLeftPanel(), BorderLayout.WEST);
+		c.setBackground(Color.BLACK);
 		setJMenuBar(menuBar);
 		
 		setSize(700, 600);
 		setVisible(true);
 		
 	}
-
+	//_______________________________________________________________________//
 	//make the myGrid (which contains subgrids and ninegrid
 	private Container makeGrid() {
 		sudokuGrid = new MyGrid();
@@ -44,7 +45,7 @@ public class SudokuSolver extends JFrame{
 		setVisible(true);
 		return sudokuGrid.getContainer();
 	}
-	
+	//_______________________________________________________________________//
 	//create menu bar with actions
 	private JMenuBar returnMenuBar() {
 		JMenuBar mb = new JMenuBar();
@@ -106,6 +107,7 @@ public class SudokuSolver extends JFrame{
 		});
 		
 		//hints menu items
+		JCheckBoxMenuItem onFillCheckBox = new JCheckBoxMenuItem("On Fill");
 		
 		
 		fileMenu.add(loadItem);
@@ -116,6 +118,8 @@ public class SudokuSolver extends JFrame{
 		helpMenu.add(aboutGame);
 		helpMenu.add(aboutProgrammers);
 		
+		hintsMenu.add(onFillCheckBox);
+		
 		
 		mb.add(fileMenu);
 		mb.add(helpMenu);
@@ -124,6 +128,7 @@ public class SudokuSolver extends JFrame{
 		return mb;
 		
 	}
+	//_______________________________________________________________________//
 	//returns the index of a container based on its 
 	//position on the nine grid
 	private int getContainerIndex(int row, int col) {
@@ -149,6 +154,7 @@ public class SudokuSolver extends JFrame{
 		return -1;
 		
 	}
+	//_______________________________________________________________________//
 	//actually set the value sent in to the container
 	private void setValues() {
 		for(PuzzleData d: loadedPuzzle) {
@@ -156,7 +162,7 @@ public class SudokuSolver extends JFrame{
 			sudokuGrid.setVal(d, index);
 		}
 	}
-	
+	//_______________________________________________________________________//
 	//load file action listener method
 	private void loadFile() {
 		
@@ -187,6 +193,7 @@ public class SudokuSolver extends JFrame{
 		//call set values
 		setValues();
 	}
+	//_______________________________________________________________________//
 	//function to write a puzzle to a file
 	public void storeFile() {
 		storedPuzzle = sudokuGrid.getStoredPuzzle();
@@ -203,10 +210,8 @@ public class SudokuSolver extends JFrame{
 			e.printStackTrace();
 		}
 		
-		
 	}
-	
-	
+	//_______________________________________________________________________//
 }
 	
 
