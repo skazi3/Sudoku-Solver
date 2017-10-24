@@ -29,7 +29,7 @@ public class MyGrid{
 		sudokuGrid = new GridLayout(GRID_SIZE,GRID_SIZE, 3,3);
 		container = new Container();
 		container.setLayout(sudokuGrid);
-
+		
 
 		initializeGrids();
 
@@ -79,7 +79,7 @@ public class MyGrid{
 		return currentButton;
 	}
 	public String getCurrentButtonLabel() {
-		return "current button:" + currentButton.getActionCommand();
+		return "Current button:" + currentButton.getActionCommand();
 	}
 	
 	private void eraserChosen() {
