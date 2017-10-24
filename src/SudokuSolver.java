@@ -80,7 +80,9 @@ public class SudokuSolver extends JFrame{
 		aboutSudoku.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				JOptionPane.showMessageDialog(null,
-		    		    "How Sudoku works!:",
+		    		    "How Sudoku works!: "
+		    		    + "Sudoku is a logic based puzzle that has numbers 1-9 in every column, row, and box."
+		    		    + " No number can be repeated in an individual column, row, or box.",
 		    		    "About Sudoku",
 		    		    JOptionPane.PLAIN_MESSAGE);
 			}
