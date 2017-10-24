@@ -107,6 +107,7 @@ public class SudokuSolver extends JFrame{
 		});
 		
 		//hints menu items
+		JCheckBoxMenuItem onFillCheckBox = new JCheckBoxMenuItem("On Fill");
 		
 		
 		fileMenu.add(loadItem);
@@ -116,6 +117,8 @@ public class SudokuSolver extends JFrame{
 		helpMenu.add(aboutSudoku);
 		helpMenu.add(aboutGame);
 		helpMenu.add(aboutProgrammers);
+		
+		hintsMenu.add(onFillCheckBox);
 		
 		
 		mb.add(fileMenu);
