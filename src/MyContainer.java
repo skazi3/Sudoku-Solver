@@ -13,7 +13,8 @@ public class MyContainer extends Container {
 	public MyContainer(){
 		numbers = new MyButton[3][3];
 		eraserChosen = false;
-		GridLayout subGrid = new GridLayout(GRID_SIZE, GRID_SIZE, 0, 0);
+		currentButton = new MyButton(" ", false);
+		GridLayout subGrid = new GridLayout(GRID_SIZE, GRID_SIZE, 1, 1);
 		setLayout(subGrid);
 		
 		for(int row = 0; row < GRID_SIZE; row++) { 

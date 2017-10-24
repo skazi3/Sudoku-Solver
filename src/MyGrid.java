@@ -29,7 +29,7 @@ public class MyGrid{
 		//actual grid
 		nineGrid = new MyButton[GRID_SIZE*3][GRID_SIZE*3];
 		subContainers = new ArrayList<MyContainer>(GRID_SIZE);
-		sudokuGrid = new GridLayout(GRID_SIZE,GRID_SIZE, 3,3);
+		sudokuGrid = new GridLayout(GRID_SIZE,GRID_SIZE, 5,5);
 		container = new Container();
 		container.setLayout(sudokuGrid);
 		
@@ -40,7 +40,7 @@ public class MyGrid{
 
 	//_______________________________________________________________________//
 	private void initializeDigits(){
-		digitGrid = new GridLayout(12, 1, 0, 0);
+		digitGrid = new GridLayout(11, 1, 0, 0);
 		currentButton = new MyButton(" ", false);
 		panel = new JPanel(digitGrid, false);
 		
@@ -75,6 +75,7 @@ public class MyGrid{
 	//_______________________________________________________________________//
 	public void initializeStatus(){
 		leftPanel = new JPanel(digitGrid, false);
+		leftPanel.setBackground(Color.LIGHT_GRAY);
 		curLabel = new JLabel(getCurrentButtonLabel());
 		curLabel.setForeground(Color.black);
 		leftPanel.add(curLabel);
@@ -104,7 +105,7 @@ public class MyGrid{
 	}
 	//_______________________________________________________________________//
 	public String getCurrentButtonLabel() {
-		return "Current button:" + currentButton.getActionCommand();
+		return "Current button:  \n\n" + currentButton.getActionCommand();
 	}
 	//_______________________________________________________________________//
 	private void eraserChosen() {

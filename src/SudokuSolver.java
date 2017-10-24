@@ -27,7 +27,7 @@ public class SudokuSolver extends JFrame{
 		c.add(sudokuContainer);
 		c.add(sudokuGrid.getPanel(), BorderLayout.EAST);
 		c.add(sudokuGrid.getLeftPanel(), BorderLayout.WEST);
-		c.setBackground(Color.gray);
+		c.setBackground(Color.BLACK);
 		setJMenuBar(menuBar);
 		
 		setSize(700, 600);
