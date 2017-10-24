@@ -37,13 +37,8 @@ public class MyGrid{
 		initializeGrids();
 
 	}
-<<<<<<< HEAD
-	//_______________________________________________________________________//
-=======
 
 	//_______________________________________________________________________//
-
->>>>>>> 42154b9616dc47941590486815fd5d3709365fcc
 	private void initializeDigits(){
 		digitGrid = new GridLayout(12, 1, 0, 0);
 		currentButton = new MyButton(" ", false);
