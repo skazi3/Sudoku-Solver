@@ -34,6 +34,13 @@ public class MyButton extends JButton{
 	public void setIsFixed(boolean isFixed) {
 		isFixedCandidate = isFixed;
 	}
+	public void setCandidates(ArrayList<Integer> possible) {
+		candidates = possible;
+	}
+	
+	public ArrayList<Integer> getCandidates(){
+		return candidates;
+	}
 	
 
 }
