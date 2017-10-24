@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 
 public class MyContainer extends Container {
@@ -7,10 +8,14 @@ public class MyContainer extends Container {
 	private int GRID_SIZE = 3;
 	private MyButton[][] numbers;
 	private MyButton currentButton;
+	private ArrayList<Integer> original = new ArrayList<Integer>();
 	private boolean eraserChosen;
 	private boolean currentButtonChosen;
 	
 	public MyContainer(){
+		for(int i = 1; i <10; i++) {
+			original.add(i);
+		}
 		numbers = new MyButton[3][3];
 		eraserChosen = false;
 		currentButton = new MyButton(" ", false);
@@ -20,6 +25,7 @@ public class MyContainer extends Container {
 		for(int row = 0; row < GRID_SIZE; row++) { 
 			for(int col = 0; col < GRID_SIZE; col++) {
 				numbers[row][col] = new MyButton(" ", false);
+				numbers[row][col].setCandidates(original);
 				numbers[row][col].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(eraserChosen) 
@@ -30,6 +36,7 @@ public class MyContainer extends Container {
 					}
 				});
 				add(numbers[row][col]);
+				
 			}
 		}	
 		
