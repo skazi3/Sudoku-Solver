@@ -11,8 +11,8 @@ public class MyGrid{
 	private int GRID_SIZE = 3;
 
 	//helper buttons
-	private MyButton[] helperButtons;
-	private GridLayout helperGrid;
+	private MyButton[] digits;
+	private GridLayout digitGrid;
 	private JPanel panel;
 	private MyButton currentButton;
 
@@ -21,8 +21,8 @@ public class MyGrid{
 	//initialize overarching grids
 	MyGrid(){
 		//helper buttons
-		helperButtons = new MyButton[10];
-		initializeHelperButtons();
+		digits = new MyButton[10];
+		initializedigits();
 		//actual grid
 		nineGrid = new MyButton[GRID_SIZE*3][GRID_SIZE*3];
 		subContainers = new ArrayList<MyContainer>(GRID_SIZE);
@@ -34,38 +34,38 @@ public class MyGrid{
 		initializeGrids();
 
 	}
-	private void initializeHelperButtons(){
-		helperGrid = new GridLayout(10, 1, 0, 0);
+	private void initializedigits(){
+		digitGrid = new GridLayout(10, 1, 0, 0);
 		currentButton = new MyButton(" ", false);
 
-		panel = new JPanel(helperGrid, false);
+		panel = new JPanel(digitGrid, false);
 		for(int i = 0; i < 9; i++){
-			helperButtons[i] = new MyButton(Integer.toString(i+1), false);
-			helperButtons[i].addActionListener(new ActionListener() {
+			digits[i] = new MyButton(Integer.toString(i+1), false);
+			digits[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					setCurrentButton((MyButton)e.getSource());
 					setCur((MyButton)e.getSource());
 				}
 			});
-			panel.add(helperButtons[i]);
+			panel.add(digits[i]);
 		}
 		
 		Image eraser = new ImageIcon( "eraser.png" ).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
 		ImageIcon e = new ImageIcon(eraser);
 		
-		helperButtons[9] = new MyButton(e);
-		helperButtons[9].addActionListener(new ActionListener() {
+		digits[9] = new MyButton(e);
+		digits[9].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				eraserChosen();
 			}
 		});
-		panel.add(helperButtons[9]);
+		panel.add(digits[9]);
 		panel.setBackground(Color.LIGHT_GRAY);
 
 	}
 	//functions for helper buttons
 	public MyButton getButton(int i) {
-		return helperButtons[i];
+		return digits[i];
 	}
 	public JPanel getPanel() {
 		return panel;

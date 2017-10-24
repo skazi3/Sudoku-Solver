@@ -37,7 +37,7 @@ public class MyContainer extends Container {
 		
 	}
 	private void storeHelperButton(MyButton b) {
-		if(currentButton.hasVal()) {
+		if(currentButton.hasVal() && b.isFixed() == false) {
 			b.setText(currentButton.getText());
 			b.setHasVal(true);
 		}
