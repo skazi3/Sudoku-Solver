@@ -36,11 +36,11 @@ public class MyGrid{
 	}
 	private void initializeHelperButtons(){
 		helperGrid = new GridLayout(10, 1, 0, 0);
-		currentButton = new MyButton(" ");
+		currentButton = new MyButton(" ", false);
 
 		panel = new JPanel(helperGrid, false);
 		for(int i = 0; i < 9; i++){
-			helperButtons[i] = new MyButton(Integer.toString(i+1));
+			helperButtons[i] = new MyButton(Integer.toString(i+1), false);
 			helperButtons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					setCurrentButton((MyButton)e.getSource());
@@ -93,7 +93,7 @@ public class MyGrid{
 	private void initializeGrids() {
 		for(int j = 0; j < GRID_SIZE*3; j++)
 			for(int k = 0; k < GRID_SIZE*3; k++){
-				nineGrid[j][k] = new MyButton(" ");
+				nineGrid[j][k] = new MyButton(" ", false);
 				nineGrid[j][k].setHasVal(false);
 			}
 		for(int i = 0; i < 9; i++) {
@@ -150,7 +150,7 @@ public class MyGrid{
 		int col = mapCoordinate(pd.getCol());
 		
 		MyContainer subContainer = getSubContainer(index);
-		subContainer.addButtonValue(pd.getVal(), row, col);
+		subContainer.addButtonValue(pd.getVal(), row, col, true);
 		
 	}
 	

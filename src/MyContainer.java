@@ -8,6 +8,7 @@ public class MyContainer extends Container {
 	private MyButton[][] numbers;
 	private MyButton currentButton;
 	private boolean eraserChosen;
+	private boolean currentButtonChosen;
 	
 	public MyContainer(){
 		numbers = new MyButton[3][3];
@@ -17,10 +18,14 @@ public class MyContainer extends Container {
 		
 		for(int row = 0; row < GRID_SIZE; row++) { 
 			for(int col = 0; col < GRID_SIZE; col++) {
-				numbers[row][col] = new MyButton(" ");
+				numbers[row][col] = new MyButton(" ", false);
 				numbers[row][col].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						storeHelperButton((MyButton)e.getSource());
+						if(eraserChosen) 
+							eraseValues((MyButton)e.getSource());
+						
+						else
+							storeHelperButton((MyButton)e.getSource());
 					}
 				});
 				add(numbers[row][col]);
@@ -32,21 +37,27 @@ public class MyContainer extends Container {
 		
 	}
 	private void storeHelperButton(MyButton b) {
-		if(b.hasVal() && eraserChosen == true) {
-			b.setText(" ");
-			b.setHasVal(false);
-		}
-		else if(currentButton.hasVal()) {
+		if(currentButton.hasVal()) {
 			b.setText(currentButton.getText());
 			b.setHasVal(true);
 		}
 	}
+	private void eraseValues(MyButton b) {
+		if(b.hasVal() && eraserChosen == true && b.isFixed() == false) {
+			b.setText(" ");
+			b.setHasVal(false);
+		}
+		
+	}
 	public void setCurrentButton(MyButton b) {
 		currentButton = b;
 		currentButton.setHasVal(true);
+		currentButtonChosen = true;
 	}
 	public void setEraserChosen(boolean isChosen) {
 		eraserChosen = isChosen;
+		if(isChosen == true)
+			currentButtonChosen = false;
 	}
 	public void updateButtons(){
 		
@@ -59,8 +70,9 @@ public class MyContainer extends Container {
 	}
 	
 	
-	public void addButtonValue(int value, int row, int col){
+	public void addButtonValue(int value, int row, int col, boolean isFixed){
 		numbers[row-1][col-1].setText(Integer.toString(value));
+		numbers[row-1][col-1].setIsFixed(isFixed);
 		updateButtons();
 	}
 	
