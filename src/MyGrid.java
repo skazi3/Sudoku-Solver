@@ -35,7 +35,7 @@ public class MyGrid{
 
 	}
 	private void initializeDigits(){
-		digitGrid = new GridLayout(11, 1, 0, 0);
+		digitGrid = new GridLayout(10, 1, 0, 0);
 		currentButton = new MyButton(" ", false);
 
 		panel = new JPanel(digitGrid, false);
@@ -49,6 +49,7 @@ public class MyGrid{
 			});
 			panel.add(digits[i]);
 		}
+		
 		
 		Image eraser = new ImageIcon( "eraser.png" ).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
 		ImageIcon e = new ImageIcon(eraser);
