@@ -35,13 +35,10 @@ public class MyGrid{
 		initializeGrids();
 
 	}
-<<<<<<< HEAD
-	private void initializedigits(){
-		digitGrid = new GridLayout(12, 1, 0, 0);
-=======
+	//_______________________________________________________________________//
 	private void initializeDigits(){
-		digitGrid = new GridLayout(10, 1, 0, 0);
->>>>>>> aa4c2ab535be23f0953d0eaf3a1bb790223a9134
+		digitGrid = new GridLayout(12, 1, 0, 0);
+
 		currentButton = new MyButton(" ", false);
 
 		panel = new JPanel(digitGrid, false);
@@ -79,31 +76,36 @@ public class MyGrid{
 		panel.add(curLabel);
 
 	}
+	//_______________________________________________________________________//
 	//functions for helper buttons
 	public MyButton getButton(int i) {
 		return digits[i];
 	}
+	//_______________________________________________________________________//
 	public JPanel getPanel() {
 		return panel;
 	}
+	//_______________________________________________________________________//
 	public void setCurrentButton(MyButton b1) {
 		currentButton.setHasVal(true);
 		currentButton = b1;
 	}
+	//_______________________________________________________________________//
 	public MyButton getCurrentButton() {
 		System.out.println("Current: " + currentButton.getActionCommand());
 		return currentButton;
 	}
+	//_______________________________________________________________________//
 	public String getCurrentButtonLabel() {
 		return "Current button:" + currentButton.getActionCommand();
 	}
-	
+	//_______________________________________________________________________//
 	private void eraserChosen() {
 		for(int i = 0; i < GRID_SIZE*3; i++) {
 			subContainers.get(i).setEraserChosen(true);
 		}
 	}
-
+	//_______________________________________________________________________//
 	//functions for grid
 	//initialize subContainers
 	private void initializeGrids() {
@@ -121,14 +123,17 @@ public class MyGrid{
 		}
 		
 	}
+	//_______________________________________________________________________//
 	//get main container of whole grid
 	public Container getContainer() {
 		return container;
 	}
+	//_______________________________________________________________________//
 	//get sub container of sub grid
 	public MyContainer getSubContainer(int i) {
 		return subContainers.get(i);
 	}
+	//_______________________________________________________________________//
 	//function to repaint grid every time based on values of button
 	public void repaint(MyContainer subContainer) {
 		
@@ -136,11 +141,13 @@ public class MyGrid{
 		   subContainer.repaint();
 		   
 	}
+	//_______________________________________________________________________//
 	public void setCur(MyButton cur) {
 		for(int i = 0; i < 9; i++) {
 			subContainers.get(i).setCurrentButton(cur);
 		}
 	}
+	//_______________________________________________________________________//
 	//map a 9x9 grid to a 3x3 to store in subcontainer
 	private int mapCoordinate(int x){
 		switch(x){
@@ -156,7 +163,7 @@ public class MyGrid{
 			default: return x;
 		}
 	}
-	
+	//_______________________________________________________________________//
 	//actually set fixed candidates onto grid
 	public void setVal(PuzzleData pd, int index){
 		//add to nine grid
@@ -169,13 +176,13 @@ public class MyGrid{
 		subContainer.addButtonValue(pd.getVal(), row, col, true);
 		
 	}
-	
+	//_______________________________________________________________________//
 	//add button value to nine grid and set has value to true
 	private void addNineGridButton(int row, int col, int val) {
 		nineGrid[row][col].setActionCommand(Integer.toString(val));
 		nineGrid[row][col].setHasVal(true);
 	}
-	
+	//_______________________________________________________________________//
 	//store current puzzle into a file if the nine grid has a 
 	//button with a value in it
 	public ArrayList<PuzzleData> getStoredPuzzle() {
@@ -192,6 +199,6 @@ public class MyGrid{
 		
 		return storedPuzzle;
 	}
-	
+	//_______________________________________________________________________//
 
 }

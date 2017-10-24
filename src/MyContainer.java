@@ -36,12 +36,14 @@ public class MyContainer extends Container {
 		setSize(200, 200);
 		
 	}
+	//_______________________________________________________________________//
 	private void storeHelperButton(MyButton b) {
 		if(currentButton.hasVal() && b.isFixed() == false) {
 			b.setText(currentButton.getText());
 			b.setHasVal(true);
 		}
 	}
+	//_______________________________________________________________________//
 	private void eraseValues(MyButton b) {
 		if(b.hasVal() && eraserChosen == true && b.isFixed() == false) {
 			b.setText(" ");
@@ -49,17 +51,20 @@ public class MyContainer extends Container {
 		}
 		
 	}
+	//_______________________________________________________________________//
 	public void setCurrentButton(MyButton b) {
 		currentButton = b;
 		currentButton.setHasVal(true);
 		currentButtonChosen = true;
 		eraserChosen = false;
 	}
+	//_______________________________________________________________________//
 	public void setEraserChosen(boolean isChosen) {
 		eraserChosen = isChosen;
 		if(isChosen == true)
 			currentButtonChosen = false;
 	}
+	//_______________________________________________________________________//
 	public void updateButtons(){
 		
 		removeAll();
@@ -69,8 +74,7 @@ public class MyContainer extends Container {
 			}
 		}	
 	}
-	
-	
+	//_______________________________________________________________________//
 	public void addButtonValue(int value, int row, int col, boolean isFixed){
 		numbers[row-1][col-1].setText(Integer.toString(value));
 		numbers[row-1][col-1].setIsFixed(isFixed);
