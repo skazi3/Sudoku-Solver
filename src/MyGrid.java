@@ -14,6 +14,7 @@ public class MyGrid{
 	private MyButton[] digits;
 	private GridLayout digitGrid;
 	private JPanel panel;
+	private JPanel leftPanel;
 	private MyButton currentButton;
 
 	private JLabel curLabel; 
@@ -24,6 +25,7 @@ public class MyGrid{
 		//helper buttons
 		digits = new MyButton[11];
 		initializeDigits();
+		initializeStatus();
 		//actual grid
 		nineGrid = new MyButton[GRID_SIZE*3][GRID_SIZE*3];
 		subContainers = new ArrayList<MyContainer>(GRID_SIZE);
@@ -35,17 +37,12 @@ public class MyGrid{
 		initializeGrids();
 
 	}
-<<<<<<< HEAD
 	//_______________________________________________________________________//
-=======
-
->>>>>>> 8e7c96233bfb4d8605d0e22e45b3c267d588a679
 	private void initializeDigits(){
 		digitGrid = new GridLayout(12, 1, 0, 0);
-
 		currentButton = new MyButton(" ", false);
-
 		panel = new JPanel(digitGrid, false);
+		
 		for(int i = 0; i < 9; i++){
 			digits[i] = new MyButton(Integer.toString(i+1), false);
 			digits[i].addActionListener(new ActionListener() {
@@ -58,7 +55,6 @@ public class MyGrid{
 			panel.add(digits[i]);
 			
 		}
-		
 		
 		Image eraser = new ImageIcon( "eraser.png" ).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
 		ImageIcon e = new ImageIcon(eraser);
@@ -74,11 +70,13 @@ public class MyGrid{
 		panel.add(digits[10]);
 		panel.setBackground(Color.LIGHT_GRAY);
 		
+	}
+	//_______________________________________________________________________//
+	public void initializeStatus(){
+		leftPanel = new JPanel(digitGrid, false);
 		curLabel = new JLabel(getCurrentButtonLabel());
-		
 		curLabel.setForeground(Color.black);
-		panel.add(curLabel);
-
+		leftPanel.add(curLabel);
 	}
 	//_______________________________________________________________________//
 	//functions for helper buttons
@@ -89,6 +87,10 @@ public class MyGrid{
 	public JPanel getPanel() {
 		return panel;
 	}
+	//_______________________________________________________________________//
+		public JPanel getLeftPanel() {
+			return leftPanel;
+		}
 	//_______________________________________________________________________//
 	public void setCurrentButton(MyButton b1) {
 		currentButton.setHasVal(true);
