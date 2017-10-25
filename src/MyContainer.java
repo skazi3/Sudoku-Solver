@@ -68,8 +68,8 @@ public class MyContainer extends Container {
 	public void removeCandidates(MyButton b) {
 		for(int row = 0; row < GRID_SIZE; row++) {
 			for(int col = 0; col < GRID_SIZE; col++) {
-				if(numbers[row][col] != b) {
-					
+				if(numbers[row][col].getVal() != b.getVal() && numbers[row][col].getVal() != -1) {
+					b.removeCandidate(numbers[row][col].getVal());
 				}
 			}
 		}
