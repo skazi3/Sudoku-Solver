@@ -70,7 +70,9 @@ public class MyGrid{
 		digits[10] = new MyButton("?", false);
 		digits[10].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				//when clicked this will display a candidate list
+				//But how do we know which button we are displaying candidate list for
 			}
 		});
 		panel.add(digits[9]);

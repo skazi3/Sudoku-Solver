@@ -8,7 +8,7 @@ import java.util.*;
 public class MyButton extends JButton{
 	private boolean hasValue;
 	private boolean isFixedCandidate;
-	private ArrayList<Integer> candidates;
+	private ArrayList<Integer> candidates = new ArrayList<Integer>();
 	
 	public MyButton(String text, boolean isFixed) {
 		super(text);
