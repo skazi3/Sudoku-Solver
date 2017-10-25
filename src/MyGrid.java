@@ -18,6 +18,7 @@ public class MyGrid{
 	private MyButton currentButton;
 
 	private JLabel curLabel; 
+	private JLabel modeLabel;
 	
 	//constructor for the actual grid,
 	//initialize overarching grids
@@ -37,10 +38,10 @@ public class MyGrid{
 		initializeGrids();
 
 	}
-
-	//_______________________________________________________________________//
 	private void initializeDigits(){
-		digitGrid = new GridLayout(11, 1, 0, 0);
+		digitGrid = new GridLayout(12, 1, 0, 0);
+
+
 		currentButton = new MyButton(" ", false);
 		panel = new JPanel(digitGrid, false);
 		
@@ -81,8 +82,11 @@ public class MyGrid{
 	public void initializeStatus(){
 		leftPanel = new JPanel(digitGrid, false);
 		leftPanel.setBackground(Color.LIGHT_GRAY);
+		modeLabel = new JLabel("Insert Mode");
+		
 		curLabel = new JLabel(getCurrentButtonLabel());
 		curLabel.setForeground(Color.black);
+		leftPanel.add(modeLabel);
 		leftPanel.add(curLabel);
 	}
 	//_______________________________________________________________________//
