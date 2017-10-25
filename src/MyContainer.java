@@ -8,32 +8,35 @@ public class MyContainer extends Container {
 	private int GRID_SIZE = 3;
 	private MyButton[][] numbers;
 	private MyButton currentButton;
-	private ArrayList<Integer> oneThruNine = new ArrayList<Integer>();
 	
 	private boolean eraserChosen;
 	private boolean currentButtonChosen;
+	private boolean showCandidates;
 	
 	public MyContainer(){
-		for(int i = 1; i <10; i++) {
-			oneThruNine.add(i);
-		}
+
 		numbers = new MyButton[3][3];
 		eraserChosen = false;
 		currentButton = new MyButton(" ", false);
 		GridLayout subGrid = new GridLayout(GRID_SIZE, GRID_SIZE, 1, 1);
 		setLayout(subGrid);
+		showCandidates = false;
 		
 		for(int row = 0; row < GRID_SIZE; row++) { 
 			for(int col = 0; col < GRID_SIZE; col++) {
 				numbers[row][col] = new MyButton(" ", false);
-				numbers[row][col].setCandidates(oneThruNine);
+
 				numbers[row][col].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						MyButton b = (MyButton)e.getSource();
 						if(eraserChosen) 
-							eraseValues((MyButton)e.getSource());
+							eraseValues(b);
 						
-						else
-							storeHelperButton((MyButton)e.getSource());
+						else if(currentButtonChosen)
+							storeHelperButton(b);
+						else if(showCandidates) {
+							b.printCandidates();
+						}
 					}
 				});
 				add(numbers[row][col]);
@@ -44,6 +47,23 @@ public class MyContainer extends Container {
 		setVisible(true);
 		setSize(200, 200);
 		
+	}
+	//_______________________________________________________________________//
+	public void setShowCandidates(boolean show) {
+		showCandidates = show;
+		if(showCandidates) {
+			currentButtonChosen = false;
+			eraserChosen = false;
+		}
+		
+		
+	}
+	public void removeCandidates(MyButton b) {
+		for(int row = 0; row < GRID_SIZE; row++) {
+			for(int col = 0; col < GRID_SIZE; col++) {
+				
+			}
+		}
 	}
 	//_______________________________________________________________________//
 	private void storeHelperButton(MyButton b) {
@@ -70,7 +90,7 @@ public class MyContainer extends Container {
 	//_______________________________________________________________________//
 	public void setEraserChosen(boolean isChosen) {
 		eraserChosen = isChosen;
-		if(isChosen == true)
+		if(eraserChosen)
 			currentButtonChosen = false;
 	}
 	//_______________________________________________________________________//

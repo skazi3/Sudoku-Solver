@@ -41,6 +41,12 @@ public class MyButton extends JButton{
 	public void setCandidates(ArrayList<Integer> possible) {
 		candidates = possible;
 	}
+	public void printCandidates() {
+		System.out.println("Candidates: \n");
+		for(int i = 0; i < 9; i++) {
+			System.out.println(candidates.get(i));
+		}
+	}
 	
 	public ArrayList<Integer> getCandidates(){
 		return candidates;

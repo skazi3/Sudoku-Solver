@@ -9,6 +9,7 @@ public class MyGrid{
 	private ArrayList<MyContainer> subContainers;
 	private MyButton[][] nineGrid; 
 	private int GRID_SIZE = 3;
+	private boolean showCandidates;
 
 	//helper buttons
 	private MyButton[] digits;
@@ -33,6 +34,7 @@ public class MyGrid{
 		sudokuGrid = new GridLayout(GRID_SIZE,GRID_SIZE, 5,5);
 		container = new Container();
 		container.setLayout(sudokuGrid);
+		showCandidates = false;
 		
 
 		initializeGrids();
@@ -70,15 +72,19 @@ public class MyGrid{
 		digits[10] = new MyButton("?", false);
 		digits[10].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setShowCandidates();
 				
-				//when clicked this will display a candidate list
-				//But how do we know which button we are displaying candidate list for
 			}
 		});
 		panel.add(digits[9]);
 		panel.add(digits[10]);
 		panel.setBackground(Color.LIGHT_GRAY);
 		
+	}
+	public void setShowCandidates() {
+		showCandidates = true;
+		for(int i = 0; i < 9; i++)
+			subContainers.get(i).setShowCandidates(true);
 	}
 	//_______________________________________________________________________//
 	public void initializeStatus(){
