@@ -46,8 +46,8 @@ public class MyButton extends JButton{
 	}
 	public void printCandidates() {
 		System.out.println("Candidates: \n");
-		for(int i = 0; i < 9; i++) {
-			System.out.println(candidates.get(i));
+		for(int i : candidates) {
+			System.out.println(i);
 		}
 	}
 	public void removeCandidate(int val) {
