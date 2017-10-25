@@ -9,10 +9,14 @@ public class MyButton extends JButton{
 	private boolean hasValue;
 	private boolean isFixedCandidate;
 	private ArrayList<Integer> candidates;
+	
 	public MyButton(String text, boolean isFixed) {
 		super(text);
 		hasValue = false;
 		isFixedCandidate = isFixed;
+		for(int i = 1; i < 10; i++) {
+			candidates.add(i);
+		}
 	}
 	public MyButton(ImageIcon e) {
 		super(e);
