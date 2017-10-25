@@ -9,13 +9,16 @@ public class MyContainer extends Container {
 	private MyButton[][] numbers;
 	private MyButton currentButton;
 	
+	private int index;
 	private boolean eraserChosen;
 	private boolean currentButtonChosen;
 	private boolean showCandidates;
+	private MyButton[][] nineGrid;
 	
-	public MyContainer(){
-
+	public MyContainer(int i){
+		
 		numbers = new MyButton[3][3];
+		index = i;
 		eraserChosen = false;
 		currentButton = new MyButton(" ", false);
 		GridLayout subGrid = new GridLayout(GRID_SIZE, GRID_SIZE, 1, 1);
@@ -56,8 +59,11 @@ public class MyContainer extends Container {
 			currentButtonChosen = false;
 			eraserChosen = false;
 		}
-		
-		
+	
+	}
+	
+	public void setNineGrid(MyButton[][] ng) {
+		nineGrid = ng;
 	}
 	public void removeCandidates(MyButton b) {
 		for(int row = 0; row < GRID_SIZE; row++) {

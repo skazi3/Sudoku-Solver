@@ -72,7 +72,10 @@ public class MyGrid{
 		digits[10] = new MyButton("?", false);
 		digits[10].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				for(int i = 0; i < 9; i++)
+					subContainers.get(i).setNineGrid(nineGrid);
 				setShowCandidates();
+				
 				
 			}
 		});
@@ -140,7 +143,7 @@ public class MyGrid{
 				nineGrid[j][k].setHasVal(false);
 			}
 		for(int i = 0; i < 9; i++) {
-			MyContainer c = new MyContainer();
+			MyContainer c = new MyContainer(i);
 			repaint(c);
 			subContainers.add(c);
 			container.add(c);
