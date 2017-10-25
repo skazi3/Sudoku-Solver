@@ -39,7 +39,7 @@ public class MyGrid{
 
 	}
 	private void initializeDigits(){
-		digitGrid = new GridLayout(12, 1, 0, 0);
+		digitGrid = new GridLayout(11, 1, 0, 0);
 
 
 		currentButton = new MyButton(" ", false);
