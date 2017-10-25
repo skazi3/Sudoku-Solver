@@ -67,6 +67,11 @@ public class MyGrid{
 			}
 		});
 		digits[10] = new MyButton("?", false);
+		digits[10].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//when clicked this will display a candidate list
+			}
+		});
 		panel.add(digits[9]);
 		panel.add(digits[10]);
 		panel.setBackground(Color.LIGHT_GRAY);
