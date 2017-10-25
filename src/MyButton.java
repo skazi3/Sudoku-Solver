@@ -30,8 +30,11 @@ public class MyButton extends JButton{
 		hasValue = y;
 	}
 	public int getVal() {
+		if(getActionCommand() == " ")
+			return -1;
 		return Integer.parseInt(getActionCommand());
 	}
+	
 	public boolean isFixed() {
 		return isFixedCandidate;
 	}
@@ -46,6 +49,10 @@ public class MyButton extends JButton{
 		for(int i = 0; i < 9; i++) {
 			System.out.println(candidates.get(i));
 		}
+	}
+	public void removeCandidate(int val) {
+		int i = candidates.indexOf(val);
+		candidates.remove(i);
 	}
 	
 	public ArrayList<Integer> getCandidates(){
