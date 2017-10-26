@@ -38,17 +38,19 @@ public class MyGrid{
 		
 
 		initializeGrids();
+		for(int i = 0; i < 9; i++)
+			subContainers.get(i).setNineGrid(nineGrid);
 
 	}
 	private void initializeDigits(){
 		digitGrid = new GridLayout(11, 1, 0, 0);
 
 
-		currentButton = new MyButton(" ", false);
+		currentButton = new MyButton(" ", false, -1, -1);
 		panel = new JPanel(digitGrid, false);
 		
 		for(int i = 0; i < 9; i++){
-			digits[i] = new MyButton(Integer.toString(i+1), false);
+			digits[i] = new MyButton(Integer.toString(i+1), false, -1, -1);
 			digits[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					setCurrentButton((MyButton)e.getSource());
@@ -69,7 +71,7 @@ public class MyGrid{
 				eraserChosen();
 			}
 		});
-		digits[10] = new MyButton("?", false);
+		digits[10] = new MyButton("?", false, -1, -1);
 		digits[10].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for(int i = 0; i < 9; i++)
@@ -79,6 +81,8 @@ public class MyGrid{
 				
 			}
 		});
+		
+		
 		panel.add(digits[9]);
 		panel.add(digits[10]);
 		panel.setBackground(Color.LIGHT_GRAY);
@@ -139,7 +143,7 @@ public class MyGrid{
 	private void initializeGrids() {
 		for(int j = 0; j < GRID_SIZE*3; j++)
 			for(int k = 0; k < GRID_SIZE*3; k++){
-				nineGrid[j][k] = new MyButton(" ", false);
+				nineGrid[j][k] = new MyButton(" ", false, j, k);
 				nineGrid[j][k].setHasVal(false);
 			}
 		for(int i = 0; i < 9; i++) {
@@ -209,6 +213,8 @@ public class MyGrid{
 	private void addNineGridButton(int row, int col, int val) {
 		nineGrid[row][col].setActionCommand(Integer.toString(val));
 		nineGrid[row][col].setHasVal(true);
+		
+		
 	}
 	//_______________________________________________________________________//
 	//store current puzzle into a file if the nine grid has a 

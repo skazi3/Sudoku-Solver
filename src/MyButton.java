@@ -12,13 +12,15 @@ public class MyButton extends JButton{
 	private int row;
 	private int col;
 	
-	public MyButton(String text, boolean isFixed) {
+	public MyButton(String text, boolean isFixed, int r, int c) {
 		super(text);
 		hasValue = false;
 		isFixedCandidate = isFixed;
 		for(int i = 1; i < 10; i++) {
 			candidates.add(i);
 		}
+		row = r;
+		col = c;
 	}
 	public MyButton(ImageIcon e) {
 		super(e);
@@ -44,18 +46,6 @@ public class MyButton extends JButton{
 		isFixedCandidate = isFixed;
 	}
 	
-	public void setRow(int rowtrack) {
-		row = rowtrack;
-	}
-	public void setCol(int colTrack) {
-		col=colTrack;
-	}
-	public int getRow() {
-		return row;
-	}
-	public int getCol() {
-		return col;
-	}
 	public void setCandidates(ArrayList<Integer> possible) {
 		candidates = possible;
 	}
@@ -66,6 +56,8 @@ public class MyButton extends JButton{
 		}
 	}
 	public void removeCandidate(int val) {
+		if (val == -1)
+			return;
 		int i = candidates.indexOf(val);
 		candidates.remove(i);
 	}
@@ -74,5 +66,17 @@ public class MyButton extends JButton{
 		return candidates;
 	}
 	
+	public void setRow(int r) {
+		row = r;
+	}
+	public void setCol(int c) {
+		col = c;
+	}
+	public int getRow() {
+		return row;
+	}
+	public int getCol() {
+		return col;
+	}
 
 }

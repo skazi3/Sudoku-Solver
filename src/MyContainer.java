@@ -20,21 +20,20 @@ public class MyContainer extends Container {
 		numbers = new MyButton[3][3];
 		index = i;
 		eraserChosen = false;
-		currentButton = new MyButton(" ", false);
+		currentButton = new MyButton(" ", false, -1, -1);
 		GridLayout subGrid = new GridLayout(GRID_SIZE, GRID_SIZE, 1, 1);
 		setLayout(subGrid);
 		showCandidates = false;
 		
 		for(int row = 0; row < GRID_SIZE; row++) { 
 			for(int col = 0; col < GRID_SIZE; col++) {
-				numbers[row][col] = new MyButton(" ", false);
+				numbers[row][col] = new MyButton(" ", false, calculateRow(row), calculateCol(col));
 
 				numbers[row][col].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						MyButton b = (MyButton)e.getSource();
 						if(eraserChosen) 
 							eraseValues(b);
-						
 						else if(currentButtonChosen)
 							storeHelperButton(b);
 						else if(showCandidates) {
@@ -52,6 +51,33 @@ public class MyContainer extends Container {
 		setSize(200, 200);
 		
 	}
+	
+	public int calculateRow(int i){
+		switch(index){
+		case 0:case 1:case 2:
+			return i;
+		case 3:case 4:case 5:
+			return i+3;
+		case 6: case 7: case 8:
+			return i+6;
+			
+		default:
+			return -1;	
+		}
+	}
+	public int calculateCol(int i){
+		switch(index){
+		case 0:case 3:case 6:
+			return i;
+		case 1:case 4:case 7:
+			return i+3;
+		case 2: case 5: case 8:
+			return i+6;
+			
+		default:
+			return -1;	
+		}
+	}
 	//_______________________________________________________________________//
 	public void setShowCandidates(boolean show) {
 		showCandidates = show;
@@ -65,22 +91,14 @@ public class MyContainer extends Container {
 	public void setNineGrid(MyButton[][] ng) {
 		nineGrid = ng;
 	}
-	/*public void rowRemoval(MyButton b){
-	 * for(int i =0; i < 9; i++){
-	 * if(nineGrid[row][i].hasVal()==true){
-	 * 		b.removeCandidate(nineGrid[row][i].getVal());
-	 * }
-	 * }
-	 * 
-	 * public void colRemoval(MyButton b){
-	 * for(int i = 0; i < 9; i++){
-	 * if(nineGrid[i][col].hasVal()==true){
-	 * 		b.removeCandidate(nineGrid[i][col].getVal());
-	 * }
-	 * }
-	 * }
-	 */
+	
 	public void removeCandidates(MyButton b) {
+		removeCandidatesSquare(b);
+		removeCandidatesRow(b);
+		removeCandidateColumn(b);
+		
+	}
+	public void removeCandidatesSquare(MyButton b){
 		for(int row = 0; row < GRID_SIZE; row++) {
 			for(int col = 0; col < GRID_SIZE; col++) {
 				if(numbers[row][col].getVal() != b.getVal() && numbers[row][col].getVal() != -1) {
@@ -89,11 +107,28 @@ public class MyContainer extends Container {
 			}
 		}
 	}
+	public void removeCandidatesRow(MyButton b){
+		for(int i =0; i < 9; i++){
+			 if(nineGrid[b.getRow()][i].getVal() != b.getVal() && nineGrid[b.getRow()][i].getVal() != -1){
+			 	b.removeCandidate(nineGrid[b.getRow()][i].getVal());
+			 }
+		}
+		
+	}
+	public void removeCandidateColumn(MyButton b){
+		for(int i = 0; i < 9; i++){
+			if(nineGrid[i][b.getCol()].getVal() != b.getVal() && nineGrid[i][b.getCol()].getVal() != -1){
+			 	b.removeCandidate(nineGrid[i][b.getCol()].getVal());
+			 }
+		}
+	}
 	//_______________________________________________________________________//
 	private void storeHelperButton(MyButton b) {
 		if(currentButton.hasVal() && b.isFixed() == false) {
 			b.setText(currentButton.getText());
 			b.setHasVal(true);
+						
+			nineGrid[b.getRow()][b.getCol()].setText(currentButton.getText());
 		}
 	}
 	//_______________________________________________________________________//
