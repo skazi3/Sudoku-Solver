@@ -147,7 +147,7 @@ public class MyGrid{
 				nineGrid[j][k].setHasVal(false);
 			}
 		for(int i = 0; i < 9; i++) {
-			MyContainer c = new MyContainer(i);
+			MyContainer c = new MyContainer(i, this);
 			repaint(c);
 			subContainers.add(c);
 			container.add(c);

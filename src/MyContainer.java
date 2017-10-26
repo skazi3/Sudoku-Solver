@@ -2,8 +2,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
+import javax.swing.*;
+
 
 public class MyContainer extends Container {
+	
+	private MyGrid gridPane;
 	
 	private int GRID_SIZE = 3;
 	private MyButton[][] numbers;
@@ -15,8 +19,9 @@ public class MyContainer extends Container {
 	private boolean showCandidates;
 	private MyButton[][] nineGrid;
 	
-	public MyContainer(int i){
+	public MyContainer(int i, MyGrid g){
 		
+		gridPane = g;
 		numbers = new MyButton[3][3];
 		index = i;
 		eraserChosen = false;
@@ -39,6 +44,7 @@ public class MyContainer extends Container {
 						else if(showCandidates) {
 							removeCandidates(b);
 							b.printCandidates();
+							gridPane.getLeftPanel().add(new JLabel("EYYYYYYYYY"));
 						}
 					}
 				});
@@ -46,6 +52,7 @@ public class MyContainer extends Container {
 				
 			}
 		}	
+		
 		
 		setVisible(true);
 		setSize(200, 200);
@@ -102,6 +109,7 @@ public class MyContainer extends Container {
 		removeCandidatesSquare(b);
 		removeCandidatesRow(b);
 		removeCandidateColumn(b);
+		
 		
 	}
 	public void removeCandidatesSquare(MyButton b){
