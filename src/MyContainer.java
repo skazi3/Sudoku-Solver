@@ -65,6 +65,21 @@ public class MyContainer extends Container {
 	public void setNineGrid(MyButton[][] ng) {
 		nineGrid = ng;
 	}
+	/*public void rowRemoval(MyButton b){
+	 * for(int i =0; i < 9; i++){
+	 * if(nineGrid[row][i].hasVal()==true){
+	 * 		b.removeCandidate(nineGrid[row][i].getVal());
+	 * }
+	 * }
+	 * 
+	 * public void colRemoval(MyButton b){
+	 * for(int i = 0; i < 9; i++){
+	 * if(nineGrid[i][col].hasVal()==true){
+	 * 		b.removeCandidate(nineGrid[i][col].getVal());
+	 * }
+	 * }
+	 * }
+	 */
 	public void removeCandidates(MyButton b) {
 		for(int row = 0; row < GRID_SIZE; row++) {
 			for(int col = 0; col < GRID_SIZE; col++) {

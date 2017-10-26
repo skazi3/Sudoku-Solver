@@ -9,6 +9,8 @@ public class MyButton extends JButton{
 	private boolean hasValue;
 	private boolean isFixedCandidate;
 	private ArrayList<Integer> candidates = new ArrayList<Integer>();
+	private int row;
+	private int col;
 	
 	public MyButton(String text, boolean isFixed) {
 		super(text);
@@ -40,6 +42,19 @@ public class MyButton extends JButton{
 	}
 	public void setIsFixed(boolean isFixed) {
 		isFixedCandidate = isFixed;
+	}
+	
+	public void setRow(int rowtrack) {
+		row = rowtrack;
+	}
+	public void setCol(int colTrack) {
+		col=colTrack;
+	}
+	public int getRow() {
+		return row;
+	}
+	public int getCol() {
+		return col;
 	}
 	public void setCandidates(ArrayList<Integer> possible) {
 		candidates = possible;
