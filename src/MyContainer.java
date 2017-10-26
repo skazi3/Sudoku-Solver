@@ -67,11 +67,17 @@ public class MyContainer extends Container {
 	}
 	public int calculateCol(int i){
 		switch(index){
-		case 0:case 3:case 6:
+		case 0:
+		case 3:
+		case 6:
 			return i;
-		case 1:case 4:case 7:
+		case 1:
+		case 4:
+		case 7:
 			return i+3;
-		case 2: case 5: case 8:
+		case 2:
+		case 5:
+		case 8:
 			return i+6;
 			
 		default:
@@ -102,7 +108,9 @@ public class MyContainer extends Container {
 		for(int row = 0; row < GRID_SIZE; row++) {
 			for(int col = 0; col < GRID_SIZE; col++) {
 				if(numbers[row][col].getVal() != b.getVal() && numbers[row][col].getVal() != -1) {
-					b.removeCandidate(numbers[row][col].getVal());
+					//makes sure we're removing a number that exists in candidates
+					if(b.getCandidates().contains(numbers[row][col].getVal()))
+						b.removeCandidate(numbers[row][col].getVal());
 				}
 			}
 		}
@@ -110,15 +118,20 @@ public class MyContainer extends Container {
 	public void removeCandidatesRow(MyButton b){
 		for(int i =0; i < 9; i++){
 			 if(nineGrid[b.getRow()][i].getVal() != b.getVal() && nineGrid[b.getRow()][i].getVal() != -1){
-			 	b.removeCandidate(nineGrid[b.getRow()][i].getVal());
+				 //if candidates still has the value we remove it
+				if(b.getCandidates().contains(nineGrid[b.getRow()][i].getVal()))
+					b.removeCandidate(nineGrid[b.getRow()][i].getVal());
 			 }
 		}
 		
 	}
 	public void removeCandidateColumn(MyButton b){
 		for(int i = 0; i < 9; i++){
+			System.out.println("COL outside: " + b.getCol() );
 			if(nineGrid[i][b.getCol()].getVal() != b.getVal() && nineGrid[i][b.getCol()].getVal() != -1){
-			 	b.removeCandidate(nineGrid[i][b.getCol()].getVal());
+				System.out.println("COL inside: " + b.getCol() );
+				if(b.getCandidates().contains(nineGrid[i][b.getCol()].getVal()))
+					b.removeCandidate(nineGrid[i][b.getCol()].getVal());
 			 }
 		}
 	}
