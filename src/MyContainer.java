@@ -64,7 +64,6 @@ public class MyContainer extends Container {
 						else if(showCandidates) {
 							removeCandidates(b);
 
-							//b.printCandidates();
 							gridPane.displayCandidates(b);
 
 						}
@@ -88,7 +87,6 @@ public class MyContainer extends Container {
 		isOnFillMode = isOnFill;
 	}
 	public boolean validateUserMove(MyButton b) {
-		System.out.println("In validate");
 		int curButtonVal = currentButton.getVal();
 		if(currentButton.hasVal())
 
@@ -231,12 +229,15 @@ public class MyContainer extends Container {
 		numbers[row-1][col-1].setIsFixed(isFixed);
 		updateButtons();
 	}
-	public void performSingle() {
+	public boolean performSingle() {
+		boolean isResolved = false;
 		for(int row = 0; row < GRID_SIZE; row++) { 
 			for(int col = 0; col < GRID_SIZE; col++) {
 				removeCandidates(numbers[row][col]);
 				MyButton temp = numbers[row][col];
-				
+				if(isResolved) {
+					break;
+				}
 				if(temp.getCandidates().size() == 1) {
 					int singleVal = temp.getCandidates().get(0);
 					numbers[row][col].setText(Integer.toString(singleVal));
@@ -247,11 +248,12 @@ public class MyContainer extends Container {
 			    		    		+ "resolved with a value of "+ singleVal + "\n",
 			    		    "SINGLE",
 			    		    JOptionPane.PLAIN_MESSAGE);
-					return;
+					isResolved = true;
 				}
 
 			}
 		}
+		return isResolved;
 	}
 	
 

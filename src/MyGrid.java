@@ -271,17 +271,9 @@ public class MyGrid{
 	}
 	public void performSingleAlgorithm() {
 		for(MyContainer sc: subContainers) {
-			//to perform single algorithm 
-			/*
-			 * idea: loop through all nine subcontainers
-			 * for each button in each container check
-			 * if candidate list is of size 1, if yes then
-			 * only one possible val can go in there.
-			 * place that value in the button and return early
-			 * stopping the algorithm . should display message 
-			 * that single algorithm resolved which button
-			 * */
-			sc.performSingle();
+			boolean resolvedSingle = sc.performSingle();
+			if(resolvedSingle)
+				break;
 		}
 	}
 	//_______________________________________________________________________//
