@@ -56,6 +56,9 @@ public class MyContainer extends Container {
 								else
 									storeHelperButton(b);
 							}
+							else {
+								storeHelperButton(b);
+							}
 							
 						}
 						else if(showCandidates) {
