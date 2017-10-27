@@ -9,22 +9,25 @@ public class MyContainer extends Container {
 	
 	private MyGrid gridPane;
 	
-	private int GRID_SIZE = 3;
 	private MyButton[][] numbers;
+	private MyButton[][] nineGrid;
 	private MyButton currentButton;
 	
 	private int index;
+	private int GRID_SIZE = 3;
+	
+	private boolean isOnFillMode;
 	private boolean eraserChosen;
 	private boolean currentButtonChosen;
 	private boolean showCandidates;
-	private MyButton[][] nineGrid;
+	
 	
 	public MyContainer(int i, MyGrid g){
-		
 		gridPane = g;
 		numbers = new MyButton[3][3];
 		index = i;
 		eraserChosen = false;
+		isOnFillMode = false;
 		currentButton = new MyButton(" ", false, -1, -1);
 		GridLayout subGrid = new GridLayout(GRID_SIZE, GRID_SIZE, 1, 1);
 		setLayout(subGrid);
@@ -39,13 +42,32 @@ public class MyContainer extends Container {
 						MyButton b = (MyButton)e.getSource();
 						if(eraserChosen) 
 							eraseValues(b);
-						else if(currentButtonChosen)
-							storeHelperButton(b);
+						else if(currentButtonChosen) {
+							if(isOnFillMode == true) {
+								//check if a proper value is being placed in the grid or not
+								removeCandidates(b);
+								b.printCandidates();
+								if(validateUserMove(b) == false) {
+									JOptionPane.showMessageDialog(null,
+							    		    "wrong move :(\n"+ currentButton.getVal() +" can't be placed there\n",
+							    		    "WRONG MOVE!",
+							    		    JOptionPane.PLAIN_MESSAGE);
+								}
+								else
+									storeHelperButton(b);
+							}
+							
+						}
 						else if(showCandidates) {
 							removeCandidates(b);
+<<<<<<< HEAD
 							//b.printCandidates();
 							gridPane.displayCandidates(b);
+=======
+							b.printCandidates();
+>>>>>>> 17acc319f8df04e242ceef1f8c17fa3900d2b7d0
 						}
+						
 					}
 				});
 				add(numbers[row][col]);
@@ -58,14 +80,38 @@ public class MyContainer extends Container {
 		setSize(200, 200);
 		
 	}
+<<<<<<< HEAD
 	//_______________________________________________________________________//
+=======
+	public void setOnFill(boolean isOnFill) {
+		isOnFillMode = isOnFill;
+	}
+	public boolean validateUserMove(MyButton b) {
+		System.out.println("In validate");
+		int curButtonVal = currentButton.getVal();
+		if(currentButton.hasVal())
+
+			if(b.getCandidates().contains(curButtonVal) == false) {
+				return false;
+			}
+		
+		return true;
+	}
+	
+>>>>>>> 17acc319f8df04e242ceef1f8c17fa3900d2b7d0
 	public int calculateRow(int i){
 		switch(index){
-		case 0:case 1:case 2:
+		case 0:
+		case 1:
+		case 2:
 			return i;
-		case 3:case 4:case 5:
+		case 3:
+		case 4:
+		case 5:
 			return i+3;
-		case 6: case 7: case 8:
+		case 6:
+		case 7: 
+		case 8:
 			return i+6;
 			
 		default:
@@ -184,6 +230,28 @@ public class MyContainer extends Container {
 		numbers[row-1][col-1].setText(Integer.toString(value));
 		numbers[row-1][col-1].setIsFixed(isFixed);
 		updateButtons();
+	}
+	public void performSingle() {
+		for(int row = 0; row < GRID_SIZE; row++) { 
+			for(int col = 0; col < GRID_SIZE; col++) {
+				removeCandidates(numbers[row][col]);
+				MyButton temp = numbers[row][col];
+				
+				if(temp.getCandidates().size() == 1) {
+					int singleVal = temp.getCandidates().get(0);
+					numbers[row][col].setText(Integer.toString(singleVal));
+					nineGrid[temp.getRow()][temp.getCol()].setText(Integer.toString(temp.getCandidates().get(0)));
+					updateButtons();
+					JOptionPane.showMessageDialog(null,
+			    		    "Single algorithm found on button at [" + temp.getRow() + "," + temp.getCol() + "] and"
+			    		    		+ "resolved with a value of "+ singleVal + "\n",
+			    		    "SINGLE",
+			    		    JOptionPane.PLAIN_MESSAGE);
+					return;
+				}
+
+			}
+		}
 	}
 	
 

@@ -261,6 +261,29 @@ public class MyGrid{
 		
 		
 	}
+	public void setOnFill(boolean isOnFill) {
+		if(isOnFill) {
+			for(MyContainer c: subContainers) {
+				c.setOnFill(isOnFill);
+			}
+		}
+			
+	}
+	public void performSingleAlgorithm() {
+		for(MyContainer sc: subContainers) {
+			//to perform single algorithm 
+			/*
+			 * idea: loop through all nine subcontainers
+			 * for each button in each container check
+			 * if candidate list is of size 1, if yes then
+			 * only one possible val can go in there.
+			 * place that value in the button and return early
+			 * stopping the algorithm . should display message 
+			 * that single algorithm resolved which button
+			 * */
+			sc.performSingle();
+		}
+	}
 	//_______________________________________________________________________//
 	//store current puzzle into a file if the nine grid has a 
 	//button with a value in it
