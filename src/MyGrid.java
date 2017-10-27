@@ -20,6 +20,10 @@ public class MyGrid{
 
 	private JLabel curLabel; 
 	private JLabel modeLabel;
+	private JLabel candidatesLabel;
+	
+	private JList<String> list;
+	DefaultListModel<String> l1;
 	
 	//constructor for the actual grid,
 	//initialize overarching grids
@@ -36,15 +40,15 @@ public class MyGrid{
 		container.setLayout(sudokuGrid);
 		showCandidates = false;
 		
-
 		initializeGrids();
 		for(int i = 0; i < 9; i++)
 			subContainers.get(i).setNineGrid(nineGrid);
 
 	}
+	//_______________________________________________________________________//
 	private void initializeDigits(){
 		digitGrid = new GridLayout(11, 1, 0, 0);
-
+		 
 
 		currentButton = new MyButton(" ", false, -1, -1);
 		panel = new JPanel(digitGrid, false);
@@ -53,9 +57,16 @@ public class MyGrid{
 			digits[i] = new MyButton(Integer.toString(i+1), false, -1, -1);
 			digits[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					modeLabel.setText("Insert Mode");
 					setCurrentButton((MyButton)e.getSource());
 					setCur((MyButton)e.getSource());
 					curLabel.setText(getCurrentButtonLabel());
+					
+					if (!l1.isEmpty()){
+						l1.removeAllElements();
+						
+					}
+					
 				}
 			});
 			panel.add(digits[i]);
@@ -69,6 +80,12 @@ public class MyGrid{
 		digits[9].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				eraserChosen();
+				modeLabel.setText("Eraser Mode");
+				curLabel.setText("Eraser");
+				if (!l1.isEmpty()){
+					l1.removeAllElements();
+					
+				}
 			}
 		});
 		digits[10] = new MyButton("?", false, -1, -1);
@@ -77,8 +94,11 @@ public class MyGrid{
 				for(int i = 0; i < 9; i++)
 					subContainers.get(i).setNineGrid(nineGrid);
 				setShowCandidates();
+				modeLabel.setText("Help Mode");
+				curLabel.setText("Candidates: ");
 				
-				
+//				MyButton b = (MyButton)e.getSource();
+//				displayCandidates(b);
 			}
 		});
 		
@@ -88,21 +108,46 @@ public class MyGrid{
 		panel.setBackground(Color.LIGHT_GRAY);
 		
 	}
+	public void displayCandidates(MyButton b){
+		
+		if (!l1.isEmpty()){
+			l1.removeAllElements();
+			
+		}
+		if(b.getText() == "?"){
+			return;
+		}
+		   
+		for (int i : b.getCandidates())
+          l1.addElement(Integer.toString(i));  
+
+       
+ 
+	}
+	//_______________________________________________________________________//
 	public void setShowCandidates() {
 		showCandidates = true;
 		for(int i = 0; i < 9; i++)
 			subContainers.get(i).setShowCandidates(true);
+	
 	}
 	//_______________________________________________________________________//
 	public void initializeStatus(){
-		leftPanel = new JPanel(digitGrid, false);
+		leftPanel = new JPanel(new GridLayout(3, 1, 0, 0), false);
 		leftPanel.setBackground(Color.LIGHT_GRAY);
+	     
 		modeLabel = new JLabel("Insert Mode");
 		
 		curLabel = new JLabel(getCurrentButtonLabel());
 		curLabel.setForeground(Color.black);
+		candidatesLabel = new JLabel("Candidates: ");
+		
 		leftPanel.add(modeLabel);
 		leftPanel.add(curLabel);
+		l1 = new DefaultListModel<>();
+		list = new JList<>(l1);  
+	    list.setBounds(100,100, 75,37);  
+	    leftPanel.add(list); 
 	}
 	//_______________________________________________________________________//
 	//functions for helper buttons
