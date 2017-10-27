@@ -9,22 +9,25 @@ public class MyContainer extends Container {
 	
 	private MyGrid gridPane;
 	
-	private int GRID_SIZE = 3;
 	private MyButton[][] numbers;
+	private MyButton[][] nineGrid;
 	private MyButton currentButton;
 	
 	private int index;
+	private int GRID_SIZE = 3;
+	
+	private boolean isOnFillMode;
 	private boolean eraserChosen;
 	private boolean currentButtonChosen;
 	private boolean showCandidates;
-	private MyButton[][] nineGrid;
+	
 	
 	public MyContainer(int i, MyGrid g){
-		
 		gridPane = g;
 		numbers = new MyButton[3][3];
 		index = i;
 		eraserChosen = false;
+		isOnFillMode = false;
 		currentButton = new MyButton(" ", false, -1, -1);
 		GridLayout subGrid = new GridLayout(GRID_SIZE, GRID_SIZE, 1, 1);
 		setLayout(subGrid);
@@ -39,13 +42,19 @@ public class MyContainer extends Container {
 						MyButton b = (MyButton)e.getSource();
 						if(eraserChosen) 
 							eraseValues(b);
-						else if(currentButtonChosen)
+						else if(currentButtonChosen) {
+							if(isOnFillMode) {
+								//check if a proper value is being placed in the grid or not
+								validateUserMove(b);
+							}
 							storeHelperButton(b);
+						}
 						else if(showCandidates) {
 							removeCandidates(b);
 							b.printCandidates();
 							gridPane.getLeftPanel().add(new JLabel("EYYYYYYYYY"));
 						}
+						
 					}
 				});
 				add(numbers[row][col]);
@@ -58,14 +67,26 @@ public class MyContainer extends Container {
 		setSize(200, 200);
 		
 	}
+	public void setOnFill(boolean isOnFill) {
+		isOnFillMode = isOnFill;
+	}
+	public void validateUserMove(MyButton b) {
+		if()
+	}
 	
 	public int calculateRow(int i){
 		switch(index){
-		case 0:case 1:case 2:
+		case 0:
+		case 1:
+		case 2:
 			return i;
-		case 3:case 4:case 5:
+		case 3:
+		case 4:
+		case 5:
 			return i+3;
-		case 6: case 7: case 8:
+		case 6:
+		case 7: 
+		case 8:
 			return i+6;
 			
 		default:

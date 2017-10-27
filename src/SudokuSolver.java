@@ -108,6 +108,11 @@ public class SudokuSolver extends JFrame{
 		
 		//hints menu items
 		JCheckBoxMenuItem onFillCheckBox = new JCheckBoxMenuItem("On Fill");
+		onFillCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sudokuGrid.setOnFill(true);
+			}
+		});
 		
 		
 		fileMenu.add(loadItem);

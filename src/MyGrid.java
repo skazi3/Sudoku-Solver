@@ -216,6 +216,14 @@ public class MyGrid{
 		
 		
 	}
+	public void setOnFill(boolean isOnFill) {
+		if(isOnFill) {
+			for(MyContainer c: subContainers) {
+				c.setOnFill(isOnFill);
+			}
+		}
+			
+	}
 	//_______________________________________________________________________//
 	//store current puzzle into a file if the nine grid has a 
 	//button with a value in it
