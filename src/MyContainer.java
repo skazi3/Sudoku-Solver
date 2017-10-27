@@ -43,8 +43,8 @@ public class MyContainer extends Container {
 							storeHelperButton(b);
 						else if(showCandidates) {
 							removeCandidates(b);
-							b.printCandidates();
-							gridPane.getLeftPanel().add(new JLabel("EYYYYYYYYY"));
+							//b.printCandidates();
+							gridPane.displayCandidates(b);
 						}
 					}
 				});
@@ -58,7 +58,7 @@ public class MyContainer extends Container {
 		setSize(200, 200);
 		
 	}
-	
+	//_______________________________________________________________________//
 	public int calculateRow(int i){
 		switch(index){
 		case 0:case 1:case 2:
@@ -72,19 +72,14 @@ public class MyContainer extends Container {
 			return -1;	
 		}
 	}
+	//_______________________________________________________________________//
 	public int calculateCol(int i){
 		switch(index){
-		case 0:
-		case 3:
-		case 6:
+		case 0:	case 3:	case 6:
 			return i;
-		case 1:
-		case 4:
-		case 7:
+		case 1:	case 4:	case 7:
 			return i+3;
-		case 2:
-		case 5:
-		case 8:
+		case 2:	case 5:	case 8:
 			return i+6;
 			
 		default:
@@ -100,11 +95,11 @@ public class MyContainer extends Container {
 		}
 	
 	}
-	
+	//_______________________________________________________________________//
 	public void setNineGrid(MyButton[][] ng) {
 		nineGrid = ng;
 	}
-	
+	//_______________________________________________________________________//
 	public void removeCandidates(MyButton b) {
 		removeCandidatesSquare(b);
 		removeCandidatesRow(b);
@@ -112,6 +107,7 @@ public class MyContainer extends Container {
 		
 		
 	}
+	//_______________________________________________________________________//
 	public void removeCandidatesSquare(MyButton b){
 		for(int row = 0; row < GRID_SIZE; row++) {
 			for(int col = 0; col < GRID_SIZE; col++) {
@@ -123,6 +119,7 @@ public class MyContainer extends Container {
 			}
 		}
 	}
+	//_______________________________________________________________________//
 	public void removeCandidatesRow(MyButton b){
 		for(int i =0; i < 9; i++){
 			 if(nineGrid[b.getRow()][i].getVal() != b.getVal() && nineGrid[b.getRow()][i].getVal() != -1){
@@ -133,11 +130,10 @@ public class MyContainer extends Container {
 		}
 		
 	}
+	//_______________________________________________________________________//
 	public void removeCandidateColumn(MyButton b){
 		for(int i = 0; i < 9; i++){
-			System.out.println("COL outside: " + b.getCol() );
 			if(nineGrid[i][b.getCol()].getVal() != b.getVal() && nineGrid[i][b.getCol()].getVal() != -1){
-				System.out.println("COL inside: " + b.getCol() );
 				if(b.getCandidates().contains(nineGrid[i][b.getCol()].getVal()))
 					b.removeCandidate(nineGrid[i][b.getCol()].getVal());
 			 }
