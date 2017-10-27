@@ -113,6 +113,12 @@ public class SudokuSolver extends JFrame{
 				sudokuGrid.setOnFill(true);
 			}
 		});
+		JMenuItem single = new JMenuItem("Single");
+		single.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sudokuGrid.performSingleAlgorithm();
+			}
+		});
 		
 		
 		fileMenu.add(loadItem);
@@ -124,7 +130,7 @@ public class SudokuSolver extends JFrame{
 		helpMenu.add(aboutProgrammers);
 		
 		hintsMenu.add(onFillCheckBox);
-		
+		hintsMenu.add(single);
 		
 		mb.add(fileMenu);
 		mb.add(helpMenu);
