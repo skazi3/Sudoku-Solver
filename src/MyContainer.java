@@ -61,7 +61,6 @@ public class MyContainer extends Container {
 						else if(showCandidates) {
 							removeCandidates(b);
 							b.printCandidates();
-							gridPane.getLeftPanel().add(new JLabel("EYYYYYYYYY"));
 						}
 						
 					}
@@ -173,9 +172,7 @@ public class MyContainer extends Container {
 	}
 	public void removeCandidateColumn(MyButton b){
 		for(int i = 0; i < 9; i++){
-			System.out.println("COL outside: " + b.getCol() );
 			if(nineGrid[i][b.getCol()].getVal() != b.getVal() && nineGrid[i][b.getCol()].getVal() != -1){
-				System.out.println("COL inside: " + b.getCol() );
 				if(b.getCandidates().contains(nineGrid[i][b.getCol()].getVal()))
 					b.removeCandidate(nineGrid[i][b.getCol()].getVal());
 			 }
@@ -226,6 +223,28 @@ public class MyContainer extends Container {
 		numbers[row-1][col-1].setText(Integer.toString(value));
 		numbers[row-1][col-1].setIsFixed(isFixed);
 		updateButtons();
+	}
+	public void performSingle() {
+		for(int row = 0; row < GRID_SIZE; row++) { 
+			for(int col = 0; col < GRID_SIZE; col++) {
+				removeCandidates(numbers[row][col]);
+				MyButton temp = numbers[row][col];
+				
+				if(temp.getCandidates().size() == 1) {
+					int singleVal = temp.getCandidates().get(0);
+					numbers[row][col].setText(Integer.toString(singleVal));
+					nineGrid[temp.getRow()][temp.getCol()].setText(Integer.toString(temp.getCandidates().get(0)));
+					updateButtons();
+					JOptionPane.showMessageDialog(null,
+			    		    "Single algorithm found on button at [" + temp.getRow() + "," + temp.getCol() + "] and"
+			    		    		+ "resolved with a value of "+ singleVal + "\n",
+			    		    "SINGLE",
+			    		    JOptionPane.PLAIN_MESSAGE);
+					return;
+				}
+
+			}
+		}
 	}
 	
 
