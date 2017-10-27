@@ -43,11 +43,20 @@ public class MyContainer extends Container {
 						if(eraserChosen) 
 							eraseValues(b);
 						else if(currentButtonChosen) {
-							if(isOnFillMode) {
+							if(isOnFillMode == true) {
 								//check if a proper value is being placed in the grid or not
-								validateUserMove(b);
+								removeCandidates(b);
+								b.printCandidates();
+								if(validateUserMove(b) == false) {
+									JOptionPane.showMessageDialog(null,
+							    		    "wrong move :(\n"+ currentButton.getVal() +" can't be placed there\n",
+							    		    "WRONG MOVE!",
+							    		    JOptionPane.PLAIN_MESSAGE);
+								}
+								else
+									storeHelperButton(b);
 							}
-							storeHelperButton(b);
+							
 						}
 						else if(showCandidates) {
 							removeCandidates(b);
@@ -70,8 +79,16 @@ public class MyContainer extends Container {
 	public void setOnFill(boolean isOnFill) {
 		isOnFillMode = isOnFill;
 	}
-	public void validateUserMove(MyButton b) {
-		if()
+	public boolean validateUserMove(MyButton b) {
+		System.out.println("In validate");
+		int curButtonVal = currentButton.getVal();
+		if(currentButton.hasVal())
+
+			if(b.getCandidates().contains(curButtonVal) == false) {
+				return false;
+			}
+		
+		return true;
 	}
 	
 	public int calculateRow(int i){
