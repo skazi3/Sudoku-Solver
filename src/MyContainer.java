@@ -60,12 +60,10 @@ public class MyContainer extends Container {
 						}
 						else if(showCandidates) {
 							removeCandidates(b);
-<<<<<<< HEAD
+
 							//b.printCandidates();
 							gridPane.displayCandidates(b);
-=======
-							b.printCandidates();
->>>>>>> 17acc319f8df04e242ceef1f8c17fa3900d2b7d0
+
 						}
 						
 					}
@@ -80,9 +78,9 @@ public class MyContainer extends Container {
 		setSize(200, 200);
 		
 	}
-<<<<<<< HEAD
+
 	//_______________________________________________________________________//
-=======
+
 	public void setOnFill(boolean isOnFill) {
 		isOnFillMode = isOnFill;
 	}
@@ -98,7 +96,6 @@ public class MyContainer extends Container {
 		return true;
 	}
 	
->>>>>>> 17acc319f8df04e242ceef1f8c17fa3900d2b7d0
 	public int calculateRow(int i){
 		switch(index){
 		case 0:
