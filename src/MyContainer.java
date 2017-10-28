@@ -11,6 +11,7 @@ public class MyContainer extends Container {
 	
 	private MyButton[][] numbers;
 	private MyButton[][] nineGrid;
+	private ArrayList<MyButton> nakedPairList = new ArrayList<MyButton>();
 	private MyButton currentButton;
 	
 	private int index;
@@ -137,7 +138,6 @@ public class MyContainer extends Container {
 			currentButtonChosen = false;
 			eraserChosen = false;
 		}
-	
 	}
 	//_______________________________________________________________________//
 	public void setNineGrid(MyButton[][] ng) {
@@ -257,5 +257,21 @@ public class MyContainer extends Container {
 		return isResolved;
 	}
 	
-
+	public void performNakedPairs() {
+		
+		int i = 0;
+		for(int row = 0; row <GRID_SIZE*3; row++) {
+			for(int col = 0; col <GRID_SIZE*3; col++) {
+				removeCandidates(nineGrid[row][col]);
+				if(nineGrid[row][col].getCandidates().size()==2) {
+					i++;
+				nakedPairList.add(nineGrid[row][col]);	
+				
+				}
+			}
+		}
+		System.out.println("i size: " + i + " nP: " + nakedPairList.size());
+		//return true;
+	}
+	
 }

@@ -91,9 +91,11 @@ public class MyGrid{
 		digits[10] = new MyButton("?", false, -1, -1);
 		digits[10].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				for(int i = 0; i < 9; i++)
 					subContainers.get(i).setNineGrid(nineGrid);
 				setShowCandidates();
+				
 				modeLabel.setText("Help Mode");
 				curLabel.setText("Candidates: ");
 				
@@ -283,6 +285,13 @@ public class MyGrid{
 				System.out.println(nineGrid[row][col].getActionCommand());
 			}
 	}
+	public void performNakedPairsAlgorithm() {
+		for(MyContainer sc: subContainers) {
+			sc.performNakedPairs();
+			
+		}
+		
+	}
 	//_______________________________________________________________________//
 	//store current puzzle into a file if the nine grid has a 
 	//button with a value in it
@@ -301,5 +310,6 @@ public class MyGrid{
 		return storedPuzzle;
 	}
 	//_______________________________________________________________________//
-
+	
+	
 }
