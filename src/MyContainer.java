@@ -238,6 +238,7 @@ public class MyContainer extends Container {
 				if(isResolved) {
 					break;
 				}
+				
 				if(temp.getCandidates().size() == 1) {
 					int singleVal = temp.getCandidates().get(0);
 					numbers[row][col].setText(Integer.toString(singleVal));

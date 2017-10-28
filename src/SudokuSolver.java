@@ -119,6 +119,12 @@ public class SudokuSolver extends JFrame{
 				sudokuGrid.performSingleAlgorithm();
 			}
 		});
+		JMenuItem hiddenSingle = new JMenuItem("Hidden Single");
+		hiddenSingle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sudokuGrid.performHiddenSingleAlgorithm();
+			}
+		});
 		
 		
 		fileMenu.add(loadItem);
@@ -131,6 +137,7 @@ public class SudokuSolver extends JFrame{
 		
 		hintsMenu.add(onFillCheckBox);
 		hintsMenu.add(single);
+		hintsMenu.add(hiddenSingle);
 		
 		mb.add(fileMenu);
 		mb.add(helpMenu);

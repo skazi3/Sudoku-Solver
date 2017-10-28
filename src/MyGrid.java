@@ -276,6 +276,13 @@ public class MyGrid{
 				break;
 		}
 	}
+	public void performHiddenSingleAlgorithm() {
+		System.out.println("Nine grid: ");
+		for(int row = 0; row < GRID_SIZE; row++)
+			for(int col = 0; col < GRID_SIZE; col++) {
+				System.out.println(nineGrid[row][col].getActionCommand());
+			}
+	}
 	//_______________________________________________________________________//
 	//store current puzzle into a file if the nine grid has a 
 	//button with a value in it
