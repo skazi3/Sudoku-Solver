@@ -271,6 +271,8 @@ public class MyContainer extends Container {
 /*______________________________________________________*/	
 	public boolean performNakedPairsRowandCol() {
 		boolean resolved = false;
+		removeCandidateRowandCol();
+		
 		if(pairsRows()== true)
 			resolved = true;
 		
@@ -345,7 +347,7 @@ public class MyContainer extends Container {
 	public boolean pairsRows() {
 		boolean resolved = false;
 		ArrayList<MyButton> pairs = new ArrayList<MyButton>();
-		removeCandidateRowandCol();
+		
 		for(int row = 0; row < 9; row++) {
 			int i =0;
 			for(int col = 0; col <9; col++) {
@@ -369,12 +371,20 @@ public class MyContainer extends Container {
 					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() != 2) {
 					
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(i));
-						//System.out.println("row: " + row + "col: " + col);
-						//System.out.println(nineGrid[row][col].getCandidates());
-						
+						nineGrid[row][col].printCandidates();
+							
 					}
+					
 				}
+				
 			}
+			for(int col = 0; col < 9; col++) {
+				//Candidate list is not updating so printing working algorithm to console for now.
+				System.out.println("row: " + row + " col: " + col);
+				System.out.println(nineGrid[row][col].getCandidates());
+				setNineGrid(nineGrid);
+			}
+			
 	}
 	
 	
