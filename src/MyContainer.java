@@ -11,7 +11,7 @@ public class MyContainer extends Container {
 	
 	private MyButton[][] numbers;
 	private MyButton[][] nineGrid;
-	private ArrayList<MyButton> nakedPairList = new ArrayList<MyButton>();
+
 	private MyButton currentButton;
 	
 	private int index;
@@ -256,51 +256,123 @@ public class MyContainer extends Container {
 		}
 		return isResolved;
 	}
-	
-	public void performNakedPairs() {
-		pairsContainer();
-	
+/*______________________________________________________*/	
+	public boolean performNakedPairsContainer() {
+		boolean resolved = false;
+		if(pairsContainer() == true) 
+			resolved = true;
+		
+		
+		return resolved;
 	}
-	public void pairsContainer() {
+/*______________________________________________________*/	
+	public boolean performNakedPairsRowandCol() {
+		boolean resolved = false;
+		if(pairsRows()== true)
+			resolved = true;
+		
+		return resolved;
+		
+	}
+/*______________________________________________________*/	
+	public boolean pairsContainer() {
+		ArrayList<MyButton> nakedPairList = new ArrayList<MyButton>();
+		boolean eliminated = false;
 		int i = 0;
 		for(int row = 0; row <GRID_SIZE; row++) {
 			for(int col = 0; col <GRID_SIZE; col++) {
 				removeCandidates(numbers[row][col]);
 				if(numbers[row][col].getCandidates().size()==2) {
 					i++;
-				nakedPairList.add(numbers[row][col]);	
+					nakedPairList.add(numbers[row][col]);	
 				
 				}
 			}
 		}
 		if( i > 1) {
-			findMatchingSet(nakedPairList);
+			eliminated = findMatching(nakedPairList,1);
 		}
+		return eliminated;
 	}
-	public void findMatchingSet(ArrayList<MyButton> pairs){
+/*______________________________________________________*/		
+	public boolean findMatching(ArrayList<MyButton> pairs,int determine){
+		boolean eliminated = false;
 		for(int i = 0; i < pairs.size(); i++) {
 			for(int j = i+1; j < pairs.size(); j++) {
 				if(pairs.get(i).getCandidates().equals(pairs.get(j).getCandidates())) {
+					if(determine == 1) {
 					removeFromContainer(pairs.get(i));
-				}
-			}
-		}
-	}
-	
-	public void removeFromContainer(MyButton found) {
-		for(int row = 0; row < GRID_SIZE; row++) {
-			for(int col = 0; col < GRID_SIZE; col++) {
-				for(int i = 0; i < 2; i++) {
-					
-					if(numbers[row][col].getCandidates().contains(found.getCandidates().get(i)) && numbers[row][col].getCandidates().size() != 2) {
-						numbers[row][col].removeCandidate(found.getCandidates().get(i));
-						
+					eliminated = true;
+					}
+					if(determine == 2) {
+						removePairsFromRow(pairs.get(i));
+						eliminated = true;
 					}
 				}
 			}
 		}
-			
-		
+		return eliminated;
 	}
+/*______________________________________________________*/		
+	public void removeFromContainer(MyButton found) {
+		for(int row = 0; row < GRID_SIZE; row++) {
+			for(int col = 0; col < GRID_SIZE; col++) {
+				for(int i = 0; i < 2; i++) {
+					if(numbers[row][col].getCandidates().contains(found.getCandidates().get(i)) && numbers[row][col].getCandidates().size() != 2) {
+						numbers[row][col].removeCandidate(found.getCandidates().get(i));
+					}
+				}
+			}
+		}
+	}
+/*______________________________________________________*/		
+	public void removeCandidateRowandCol() {
+		for(int row = 0; row < 9; row++) {
+			for(int col = 0; col <9; col++) {
+				removeCandidatesRow(nineGrid[row][col]);
+			}
+		}
+		for(int row = 0; row < 9; row++) {
+			for(int col = 0; col <9; col++) {
+				removeCandidateColumn(nineGrid[row][col]);
+			}
+		}
+}
+/*______________________________________________________*/		
+	public boolean pairsRows() {
+		boolean resolved = false;
+		ArrayList<MyButton> pairs = new ArrayList<MyButton>();
+		removeCandidateRowandCol();
+		for(int row = 0; row < 9; row++) {
+			int i =0;
+			for(int col = 0; col <9; col++) {
+				if(nineGrid[row][col].getCandidates().size() == 2) {
+					i++;
+					pairs.add(nineGrid[row][col]);
+				}
+			}
+			if( i > 1) {
+				resolved = findMatching(pairs,2);
+				pairs = new ArrayList<MyButton>();
+			}
+		}
+		return resolved;
+	}
+/*______________________________________________________*/
+	public void removePairsFromRow(MyButton found) {
+		int row = found.getRow();
+			for(int col = 0; col < GRID_SIZE*3; col++) {
+				for(int i = 0; i < 2; i++) {
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() != 2) {
+					
+						nineGrid[row][col].removeCandidate(found.getCandidates().get(i));
+						//System.out.println("row: " + row + "col: " + col);
+						//System.out.println(nineGrid[row][col].getCandidates());
+						
+					}
+				}
+			}
+	}
+	
 	
 }

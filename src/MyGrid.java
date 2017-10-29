@@ -287,10 +287,11 @@ public class MyGrid{
 	}
 	public void performNakedPairsAlgorithm() {
 		for(MyContainer sc: subContainers) {
-			sc.performNakedPairs();
-			
-		}
+			sc.performNakedPairsContainer();
 		
+		}
+		MyContainer single = subContainers.get(1);
+		 single.performNakedPairsRowandCol();
 	}
 	//_______________________________________________________________________//
 	//store current puzzle into a file if the nine grid has a 
