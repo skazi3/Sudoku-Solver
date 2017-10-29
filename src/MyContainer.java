@@ -46,32 +46,24 @@ public class MyContainer extends Container {
 							if(isOnFillMode == true) {
 								//check if a proper value is being placed in the grid or not
 								removeCandidates(b);
-								b.printCandidates();
-								if(validateUserMove(b) == false) {
+								if(validateUserMove(b) == false)
 									JOptionPane.showMessageDialog(null,
 							    		    "wrong move :(\n"+ currentButton.getVal() +" can't be placed there\n",
 							    		    "WRONG MOVE!",
 							    		    JOptionPane.PLAIN_MESSAGE);
-								}
 								else
 									storeHelperButton(b);
 							}
-							else {
+							else 
 								storeHelperButton(b);
-							}
-							
 						}
 						else if(showCandidates) {
 							removeCandidates(b);
-
 							gridPane.displayCandidates(b);
-
 						}
-						
 					}
 				});
-				add(numbers[row][col]);
-				
+				add(numbers[row][col]);	
 			}
 		}	
 		
@@ -96,6 +88,7 @@ public class MyContainer extends Container {
 		
 		return true;
 	}
+	
 	
 	public int calculateRow(int i){
 		switch(index){
@@ -188,7 +181,7 @@ public class MyContainer extends Container {
 		if(currentButton.hasVal() && b.isFixed() == false) {
 			b.setText(currentButton.getText());
 			b.setHasVal(true);
-						
+			gridPane.addNineGridButton(b.getRow(), b.getCol(), currentButton.getVal());			
 			nineGrid[b.getRow()][b.getCol()].setText(currentButton.getText());
 		}
 	}
@@ -242,10 +235,11 @@ public class MyContainer extends Container {
 				if(temp.getCandidates().size() == 1) {
 					int singleVal = temp.getCandidates().get(0);
 					numbers[row][col].setText(Integer.toString(singleVal));
+					gridPane.addNineGridButton(temp.getRow(), temp.getCol(), singleVal);
 					nineGrid[temp.getRow()][temp.getCol()].setText(Integer.toString(temp.getCandidates().get(0)));
 					updateButtons();
 					JOptionPane.showMessageDialog(null,
-			    		    "Single algorithm found on button at [" + temp.getRow() + "," + temp.getCol() + "] and"
+			    		    "Single algorithm found on button at [" + (temp.getRow()+1) + "," + (temp.getCol()+1) + "] and "
 			    		    		+ "resolved with a value of "+ singleVal + "\n",
 			    		    "SINGLE",
 			    		    JOptionPane.PLAIN_MESSAGE);
@@ -254,6 +248,13 @@ public class MyContainer extends Container {
 
 			}
 		}
+		return isResolved;
+	}
+	public boolean performHiddenSingle() {
+		boolean isResolved = false;
+		
+		
+		
 		return isResolved;
 	}
 	
