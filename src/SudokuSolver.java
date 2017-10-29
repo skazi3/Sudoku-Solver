@@ -3,7 +3,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
-
+//Class: Sudoku Solver
 //main class that starts off the game and initializes jframe
 public class SudokuSolver extends JFrame{
 	private Container c;
@@ -20,16 +20,19 @@ public class SudokuSolver extends JFrame{
 		super("Suduko Solver");
 		loadedPuzzle = new ArrayList<PuzzleData>();
 		storedPuzzle = new ArrayList<PuzzleData>();
-		menuBar = returnMenuBar();
+
+		setJMenuBar(returnMenuBar());
+		
 		c = getContentPane();
 		c.setLayout(new BorderLayout());
+		
 		Container sudokuContainer = makeGrid();
 		c.add(sudokuContainer);
 		c.add(sudokuGrid.getPanel(), BorderLayout.EAST);
 		c.add(sudokuGrid.getLeftPanel(), BorderLayout.WEST);
 		c.setBackground(Color.BLACK);
-		setJMenuBar(menuBar);
 		
+		//set a fixed size
 		setSize(700, 600);
 		setVisible(true);
 		
@@ -43,10 +46,11 @@ public class SudokuSolver extends JFrame{
 		setSize(400, 400);
 		setTitle("Sudoku Solver");
 		setVisible(true);
+		
 		return sudokuGrid.getContainer();
 	}
 	//_______________________________________________________________________//
-	//create menu bar with actions
+	//create menu bar with action listeners
 	private JMenuBar returnMenuBar() {
 		JMenuBar mb = new JMenuBar();
 		JMenu fileMenu = new JMenu("File");
@@ -91,7 +95,13 @@ public class SudokuSolver extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				JOptionPane.showMessageDialog(null,
 		    		    "How our interface works!:",
-		    		    "About the Interface",
+		    		    "About the Interface:\nOur Sudoku game contains one large JFrame, with nine"
+		    		    + "subContainers, and an underlying nine by nine container to connect each box"
+		    		    + "A panel on the left side will inform you about which button you have clicked to place "
+		    		    + "into the tile, if you have the eraser chosen, or will display candidate information about"
+		    		    + "each button. The hints section allows you to toggle on fill which will stop you from placing"
+		    		    + "a wrong button, and it also helps perform algorithms to resolve a single cell. Clicking the last"
+		    		    + "menu item will solve the entire board.",
 		    		    JOptionPane.PLAIN_MESSAGE);
 			}
 		});
@@ -133,6 +143,21 @@ public class SudokuSolver extends JFrame{
 			}
 		});
 		
+		JMenuItem lockedCandidate = new JMenuItem("Locked Candidate");
+		lockedCandidate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		JMenuItem solvePuzzle = new JMenuItem("Solve Puzzle");
+		lockedCandidate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		//add to the respective menu's
 		fileMenu.add(loadItem);
 		fileMenu.add(storeItem);
 		fileMenu.add(exitItem);
@@ -144,7 +169,9 @@ public class SudokuSolver extends JFrame{
 		hintsMenu.add(onFillCheckBox);
 		hintsMenu.add(single);
 		hintsMenu.add(hiddenSingle);
+		hintsMenu.add(lockedCandidate);
 		hintsMenu.add(nakedPairs);
+		hintsMenu.add(solvePuzzle);
 		
 		mb.add(fileMenu);
 		mb.add(helpMenu);
@@ -155,7 +182,7 @@ public class SudokuSolver extends JFrame{
 	}
 	//_______________________________________________________________________//
 	//returns the index of a container based on its 
-	//position on the nine grid
+	//position on the nine grid (basically to map the numbers given to us in data file
 	private int getContainerIndex(int row, int col) {
 		if(row <= 3 && row >= 1 && col <= 3 && col >=1) 
 			return 0;
@@ -218,6 +245,7 @@ public class SudokuSolver extends JFrame{
 		//call set values
 		setValues();
 	}
+	
 	//_______________________________________________________________________//
 	//function to write a puzzle to a file
 	public void storeFile() {
