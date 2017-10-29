@@ -63,6 +63,12 @@ public class MyButton extends JButton{
 		int i = candidates.indexOf(val);
 		candidates.remove(i);
 	}
+	public void resetCandidateList(){
+		candidates.removeAll(candidates);
+		for(int i = 1; i < 10; i++) {
+			candidates.add(i);
+		}
+	}
 	
 	public ArrayList<Integer> getCandidates(){
 		return candidates;

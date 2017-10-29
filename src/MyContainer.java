@@ -138,10 +138,10 @@ public class MyContainer extends Container {
 	}
 	//_______________________________________________________________________//
 	public void removeCandidates(MyButton b) {
+		b.resetCandidateList();
 		removeCandidatesSquare(b);
 		removeCandidatesRow(b);
 		removeCandidateColumn(b);
-		
 		
 	}
 	//_______________________________________________________________________//
@@ -188,6 +188,7 @@ public class MyContainer extends Container {
 	//_______________________________________________________________________//
 	private void eraseValues(MyButton b) {
 		if(b.hasVal() && eraserChosen == true && b.isFixed() == false) {
+			nineGrid[b.getRow()][b.getCol()].setActionCommand(" ");
 			b.setText(" ");
 			b.setHasVal(false);
 		}
