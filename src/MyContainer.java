@@ -258,20 +258,51 @@ public class MyContainer extends Container {
 	}
 	
 	public void performNakedPairs() {
-		
+		pairsContainer();
+	
+	}
+	public void pairsContainer() {
 		int i = 0;
-		for(int row = 0; row <GRID_SIZE*3; row++) {
-			for(int col = 0; col <GRID_SIZE*3; col++) {
-				removeCandidates(nineGrid[row][col]);
-				if(nineGrid[row][col].getCandidates().size()==2) {
+		for(int row = 0; row <GRID_SIZE; row++) {
+			for(int col = 0; col <GRID_SIZE; col++) {
+				removeCandidates(numbers[row][col]);
+				if(numbers[row][col].getCandidates().size()==2) {
 					i++;
-				nakedPairList.add(nineGrid[row][col]);	
+				nakedPairList.add(numbers[row][col]);	
 				
 				}
 			}
 		}
-		System.out.println("i size: " + i + " nP: " + nakedPairList.size());
-		//return true;
+		if( i > 1) {
+			System.out.print("in if");
+			findMatchingSet(nakedPairList);
+		}
+	}
+	public void findMatchingSet(ArrayList<MyButton> pairs){
+		for(int i = 0; i < pairs.size(); i++) {
+			for(int j = i+1; j < pairs.size(); j++) {
+				if(pairs.get(i).getCandidates().equals(pairs.get(j).getCandidates())) {
+					removeFromContainer(pairs.get(i));
+				}
+			}
+		}
+	}
+	
+	public void removeFromContainer(MyButton found) {
+		for(int row = 0; row < GRID_SIZE; row++) {
+			for(int col = 0; col < GRID_SIZE; col++) {
+				for(int i = 0; i < 2; i++) {
+					int samer = found.getRow();
+					int samecol = found.getCol();
+					if(numbers[row][col].getCandidates().contains(found.getCandidates().get(i)) && row != samer && col != samecol) {
+						numbers[row][col].removeCandidate(found.getCandidates().get(i));
+						System.out.println(found.getCandidates().get(i));
+					}
+				}
+			}
+		}
+			
+		
 	}
 	
 }
