@@ -274,7 +274,6 @@ public class MyContainer extends Container {
 			}
 		}
 		if( i > 1) {
-			System.out.print("in if");
 			findMatchingSet(nakedPairList);
 		}
 	}
@@ -292,11 +291,10 @@ public class MyContainer extends Container {
 		for(int row = 0; row < GRID_SIZE; row++) {
 			for(int col = 0; col < GRID_SIZE; col++) {
 				for(int i = 0; i < 2; i++) {
-					int samer = found.getRow();
-					int samecol = found.getCol();
-					if(numbers[row][col].getCandidates().contains(found.getCandidates().get(i)) && row != samer && col != samecol) {
+					
+					if(numbers[row][col].getCandidates().contains(found.getCandidates().get(i)) && numbers[row][col].getCandidates().size() != 2) {
 						numbers[row][col].removeCandidate(found.getCandidates().get(i));
-						System.out.println(found.getCandidates().get(i));
+						
 					}
 				}
 			}
