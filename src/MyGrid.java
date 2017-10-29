@@ -257,7 +257,7 @@ public class MyGrid{
 	}
 	//_______________________________________________________________________//
 	//add button value to nine grid and set has value to true
-	private void addNineGridButton(int row, int col, int val) {
+	public void addNineGridButton(int row, int col, int val) {
 		nineGrid[row][col].setActionCommand(Integer.toString(val));
 		nineGrid[row][col].setHasVal(true);
 		
@@ -279,11 +279,12 @@ public class MyGrid{
 		}
 	}
 	public void performHiddenSingleAlgorithm() {
-		System.out.println("Nine grid: ");
-		for(int row = 0; row < GRID_SIZE; row++)
-			for(int col = 0; col < GRID_SIZE; col++) {
-				System.out.println(nineGrid[row][col].getActionCommand());
-			}
+		for(MyContainer c: subContainers) {
+			c.setNineGrid(nineGrid);
+			c.performHiddenSingle();
+		}
+
+		
 	}
 	public void performNakedPairsAlgorithm() {
 		for(MyContainer sc: subContainers) {

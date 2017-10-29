@@ -56,6 +56,7 @@ public class MyButton extends JButton{
 		}
 		
 	}
+	
 	public void removeCandidate(int val) {
 		if (val == -1)
 			return;
