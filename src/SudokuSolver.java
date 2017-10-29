@@ -126,6 +126,12 @@ public class SudokuSolver extends JFrame{
 			}
 		});
 		
+		JMenuItem nakedPairs= new JMenuItem("Naked Pairs");
+		nakedPairs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sudokuGrid.performNakedPairsAlgorithm();
+			}
+		});
 		
 		fileMenu.add(loadItem);
 		fileMenu.add(storeItem);
@@ -138,6 +144,7 @@ public class SudokuSolver extends JFrame{
 		hintsMenu.add(onFillCheckBox);
 		hintsMenu.add(single);
 		hintsMenu.add(hiddenSingle);
+		hintsMenu.add(nakedPairs);
 		
 		mb.add(fileMenu);
 		mb.add(helpMenu);

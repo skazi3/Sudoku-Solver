@@ -11,6 +11,7 @@ public class MyContainer extends Container {
 	
 	private MyButton[][] numbers;
 	private MyButton[][] nineGrid;
+	private ArrayList<MyButton> nakedPairList = new ArrayList<MyButton>();
 	private MyButton currentButton;
 	
 	private int index;
@@ -130,7 +131,6 @@ public class MyContainer extends Container {
 			currentButtonChosen = false;
 			eraserChosen = false;
 		}
-	
 	}
 	//_______________________________________________________________________//
 	public void setNineGrid(MyButton[][] ng) {
@@ -258,5 +258,50 @@ public class MyContainer extends Container {
 		return isResolved;
 	}
 	
-
+	public void performNakedPairs() {
+		pairsContainer();
+	
+	}
+	public void pairsContainer() {
+		int i = 0;
+		for(int row = 0; row <GRID_SIZE; row++) {
+			for(int col = 0; col <GRID_SIZE; col++) {
+				removeCandidates(numbers[row][col]);
+				if(numbers[row][col].getCandidates().size()==2) {
+					i++;
+				nakedPairList.add(numbers[row][col]);	
+				
+				}
+			}
+		}
+		if( i > 1) {
+			findMatchingSet(nakedPairList);
+		}
+	}
+	public void findMatchingSet(ArrayList<MyButton> pairs){
+		for(int i = 0; i < pairs.size(); i++) {
+			for(int j = i+1; j < pairs.size(); j++) {
+				if(pairs.get(i).getCandidates().equals(pairs.get(j).getCandidates())) {
+					removeFromContainer(pairs.get(i));
+				}
+			}
+		}
+	}
+	
+	public void removeFromContainer(MyButton found) {
+		for(int row = 0; row < GRID_SIZE; row++) {
+			for(int col = 0; col < GRID_SIZE; col++) {
+				for(int i = 0; i < 2; i++) {
+					
+					if(numbers[row][col].getCandidates().contains(found.getCandidates().get(i)) && numbers[row][col].getCandidates().size() != 2) {
+						numbers[row][col].removeCandidate(found.getCandidates().get(i));
+						
+					}
+				}
+			}
+		}
+			
+		
+	}
+	
 }
