@@ -1,22 +1,30 @@
+//Class: MyGrid
+//Container that holds nine subcontainers. Essentially the whole 9x9 grid
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
 public class MyGrid{
-	private GridLayout subGrid, sudokuGrid;
-	private Container container;
+	//private data members
+	private GridLayout             subGrid, sudokuGrid;
 	private ArrayList<MyContainer> subContainers;
-	private MyButton[][] nineGrid; 
-	private int GRID_SIZE = 3;
-	private boolean showCandidates;
+	private Container              container;
+	
+	private int          GRID_SIZE = 3;
+	private boolean      showCandidates;
+	
 
 	//helper buttons
-	private MyButton[] digits;
-	private GridLayout digitGrid;
-	private JPanel panel;
-	private JPanel leftPanel;
-	private MyButton currentButton;
+	private MyButton[][] nineGrid; 
+	private MyButton     currentButton;
+	private GridLayout   digitGrid;
+	private JPanel       leftPanel;
+	private MyButton[]   digits;
+	private JPanel       panel;
+
+	
 
 	private JLabel curLabel; 
 	private JLabel modeLabel;
@@ -26,19 +34,20 @@ public class MyGrid{
 	DefaultListModel<String> l1;
 	
 	//constructor for the actual grid,
-	//initialize overarching grids
+	//initialize all the grids
 	MyGrid(){
-		//helper buttons
+		//helper buttons for the right side
 		digits = new MyButton[11];
 		initializeDigits();
 		initializeStatus();
+		
 		//actual grid
-		nineGrid = new MyButton[GRID_SIZE*3][GRID_SIZE*3];
+		showCandidates= false;
+		nineGrid =      new MyButton[GRID_SIZE*3][GRID_SIZE*3];
 		subContainers = new ArrayList<MyContainer>(GRID_SIZE);
-		sudokuGrid = new GridLayout(GRID_SIZE,GRID_SIZE, 5,5);
-		container = new Container();
+		sudokuGrid =    new GridLayout(GRID_SIZE,GRID_SIZE, 5,5);
+		container =     new Container();
 		container.setLayout(sudokuGrid);
-		showCandidates = false;
 		
 		initializeGrids();
 		for(int i = 0; i < 9; i++)
@@ -46,13 +55,13 @@ public class MyGrid{
 
 	}
 	//_______________________________________________________________________//
+	//initializes the right panel with helper buttons
 	private void initializeDigits(){
 		digitGrid = new GridLayout(11, 1, 0, 0);
 		 
-
 		currentButton = new MyButton(" ", false, -1, -1);
 		panel = new JPanel(digitGrid, false);
-		
+		//action listener for when any of the helper buttons are clicked
 		for(int i = 0; i < 9; i++){
 			digits[i] = new MyButton(Integer.toString(i+1), false, -1, -1);
 			digits[i].addActionListener(new ActionListener() {
@@ -62,17 +71,13 @@ public class MyGrid{
 					setCur((MyButton)e.getSource());
 					curLabel.setText(getCurrentButtonLabel());
 					
-					if (!l1.isEmpty()){
+					if (!l1.isEmpty())
 						l1.removeAllElements();
-						
-					}
-					
-				}
-			});
+				}});
 			panel.add(digits[i]);
 			
 		}
-		
+		//adds eraser to the eraser button
 		Image eraser = new ImageIcon( "eraser.png" ).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
 		ImageIcon e = new ImageIcon(eraser);
 		
@@ -82,12 +87,10 @@ public class MyGrid{
 				eraserChosen();
 				modeLabel.setText("Eraser Mode");
 				curLabel.setText("Eraser");
-				if (!l1.isEmpty()){
+				if (!l1.isEmpty())
 					l1.removeAllElements();
-					
-				}
-			}
-		});
+			}});
+		//to show candidates of a button
 		digits[10] = new MyButton("?", false, -1, -1);
 		digits[10].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,30 +101,24 @@ public class MyGrid{
 				
 				modeLabel.setText("Help Mode");
 				curLabel.setText("Candidates: ");
-				
-//				MyButton b = (MyButton)e.getSource();
-//				displayCandidates(b);
 			}
 		});
 		
-		
+		//add the two extra digits
 		panel.add(digits[9]);
 		panel.add(digits[10]);
 		panel.setBackground(Color.LIGHT_GRAY);
 		
 	}
+	//will display candidates on left panel
 	public void displayCandidates(MyButton b){
 		
-		if (!l1.isEmpty()){
+		if (!l1.isEmpty())
 			l1.removeAllElements();
-			
-		}
-		if(b.getText() == "?"){
+		if(b.getText() == "?")
 			return;
-		}
-		   
-		for (int i : b.getCandidates())
-          l1.addElement(Integer.toString(i));  
+		for (int candidate : b.getCandidates())
+          l1.addElement(Integer.toString(candidate));  
 
        
  
@@ -134,6 +131,7 @@ public class MyGrid{
 	
 	}
 	//_______________________________________________________________________//
+	//initializes left panel
 	public void initializeStatus(){
 		leftPanel = new JPanel(new GridLayout(3, 1, 0, 0), false);
 		leftPanel.setBackground(Color.LIGHT_GRAY);
@@ -152,7 +150,7 @@ public class MyGrid{
 	    leftPanel.add(list); 
 	}
 	//_______________________________________________________________________//
-	//functions for helper buttons
+	//getters and setters for helper buttons
 	public MyButton getButton(int i) {
 		return digits[i];
 	}
@@ -263,6 +261,7 @@ public class MyGrid{
 		
 		
 	}
+	//toggle on fill 
 	public void setOnFill(boolean isOnFill) {
 		if(isOnFill) {
 			for(MyContainer c: subContainers) {
@@ -271,6 +270,7 @@ public class MyGrid{
 		}
 			
 	}
+	//ALGORITHMS BEGIN HERE: tread carefully
 	public void performSingleAlgorithm() {
 		for(MyContainer sc: subContainers) {
 			boolean resolvedSingle = sc.performSingle();
@@ -294,20 +294,17 @@ public class MyGrid{
 		MyContainer single = subContainers.get(1);
 		 single.performNakedPairsRowandCol();
 	}
+	
 	//_______________________________________________________________________//
 	//store current puzzle into a file if the nine grid has a 
 	//button with a value in it
 	public ArrayList<PuzzleData> getStoredPuzzle() {
 		ArrayList<PuzzleData> storedPuzzle = new ArrayList<PuzzleData>();
 		//iterate through the nine grid
-		for(int row = 0; row < GRID_SIZE*3; row++) {
-			for(int col = 0; col < GRID_SIZE*3; col++) {
-				if(nineGrid[row][col].hasVal() == true) {
+		for(int row = 0; row < GRID_SIZE*3; row++) 
+			for(int col = 0; col < GRID_SIZE*3; col++) 
+				if(nineGrid[row][col].hasVal() == true) 
 					storedPuzzle.add(new PuzzleData(row+1, col+1, nineGrid[row][col].getVal()));
-				}
-			}
-		}
-		
 		
 		return storedPuzzle;
 	}
