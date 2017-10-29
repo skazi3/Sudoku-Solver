@@ -280,16 +280,14 @@ public class MyGrid{
 	}
 	public void performHiddenSingleAlgorithm() {
 		for(MyContainer c: subContainers) {
-			c.setNineGrid(nineGrid);
-			c.performHiddenSingle();
-		}
-
-		
+			boolean resolved = c.performHiddenSingle();
+			if(resolved)
+				break;
+		}		
 	}
 	public void performNakedPairsAlgorithm() {
 		for(MyContainer sc: subContainers) {
 			sc.performNakedPairsContainer();
-		
 		}
 		MyContainer single = subContainers.get(1);
 		 single.performNakedPairsRowandCol();

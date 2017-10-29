@@ -138,7 +138,6 @@ public class MyContainer extends Container {
 	}
 	//_______________________________________________________________________//
 	public void removeCandidates(MyButton b) {
-		b.resetCandidateList();
 		removeCandidatesSquare(b);
 		removeCandidatesRow(b);
 		removeCandidateColumn(b);
@@ -257,20 +256,50 @@ public class MyContainer extends Container {
 		boolean resolved = false;
 		if(pairsContainer() == true) 
 			resolved = true;
-		
-		
 		return resolved;
+		
 }
 	public boolean performHiddenSingle() {
 		boolean isResolved = false;
-		HashMap<MyButton, ArrayList<Integer>> hiddenSingle = new HashMap<MyButton, ArrayList<Integer>>();
-		/*
-		 * idea: implement some kind of a hashmap where we loop through all buttons in a box,
-		 * row, and column and then check if a candidate only appears once when we iterate through
-		 * the hashmap. if it only appears once, the key to the hashmap will be the button that
-		 * should get that value. hashmap should be of type <MyButton, ArrayList<Integer>>*/
 		
+		int row = 0;
+		int col = 0;
 		
+		for( row = 0; row < GRID_SIZE; row++) { 
+			for( col = 0; col < GRID_SIZE; col++) {
+				removeCandidates(numbers[row][col]);
+			}
+		}	
+		
+		for( row = 0; row < GRID_SIZE; row++) { 
+			
+			for( col = 0; col < GRID_SIZE; col++) {
+				if(numbers[row][col].getCandidates().size() == 1){
+					isResolved = true;
+					break;
+				}
+			}
+			if(isResolved){
+				break;
+			}
+		}
+		
+		if(isResolved){
+			
+			int val = numbers[row][col].getCandidates().get(0);
+			numbers[row][col].setText(Integer.toString(val));
+			gridPane.addNineGridButton(numbers[row][col].getRow(), numbers[row][col].getCol(), val);
+			nineGrid[numbers[row][col].getRow()][numbers[row][col].getCol()].setText(Integer.toString(numbers[row][col].getCandidates().get(0)));
+			updateButtons();
+			
+			JOptionPane.showMessageDialog(null,
+	    		    "Hidden Single algorithm found on button at [" + (numbers[row][col].getRow()+1) + "," + (numbers[row][col].getCol()+1) + "] and "
+	    		    		+ "resolved with a value of "+ val  + "\n",
+	    		    "SINGLE",
+	    		    JOptionPane.PLAIN_MESSAGE);
+			
+		}
+
 		return isResolved;
 	
 	}
@@ -457,7 +486,7 @@ public class MyContainer extends Container {
 				//Candidate list is not updating so printing working algorithm to console for now.
 				System.out.println("row: " + row + " col: " + col);
 				System.out.println(nineGrid[row][col].getCandidates());
-				setNineGrid(nineGrid);
+				
 			}
 			
 	}
