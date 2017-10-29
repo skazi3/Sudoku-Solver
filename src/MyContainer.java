@@ -275,6 +275,8 @@ public class MyContainer extends Container {
 		
 		if(pairsRows()== true)
 			resolved = true;
+		if(pairsCols() == true) 
+			resolved = true;
 		
 		return resolved;
 		
@@ -311,6 +313,10 @@ public class MyContainer extends Container {
 					}
 					if(determine == 2) {
 						removePairsFromRow(pairs.get(i));
+						eliminated = true;
+					}
+					if(determine == 3) {
+						removePairsFromCol(pairs.get(i));
 						eliminated = true;
 					}
 				}
@@ -369,14 +375,24 @@ public class MyContainer extends Container {
 			for(int col = 0; col < GRID_SIZE*3; col++) {
 				for(int i = 0; i < 2; i++) {
 					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() != 2) {
-					
+						
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(i));
-						nineGrid[row][col].printCandidates();
+						//nineGrid[row][col].printCandidates();
 							
 					}
-					
 				}
-				
+				if(nineGrid[row][col].getCandidates().size() == 2) {
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)) 
+							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)))) {
+						nineGrid[row][col].removeCandidate(found.getCandidates().get(0));
+					}
+				}
+				if(nineGrid[row][col].getCandidates().size() == 2) {
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)) 
+							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)))) {
+						nineGrid[row][col].removeCandidate(found.getCandidates().get(1));
+					}
+				}
 			}
 			for(int col = 0; col < 9; col++) {
 				//Candidate list is not updating so printing working algorithm to console for now.
@@ -386,6 +402,57 @@ public class MyContainer extends Container {
 			}
 			
 	}
-	
-	
+/*_________________________________________________________________*/
+	public boolean pairsCols(){
+		boolean eliminated = false;
+		ArrayList<MyButton> pairs = new ArrayList<MyButton>();
+		
+		for(int col = 0; col < 9; col++) {
+			int i =0;
+			for(int row = 0; row <9; row++) {
+				if(nineGrid[row][col].getCandidates().size() == 2) {
+					i++;
+					pairs.add(nineGrid[row][col]);
+				}
+			}
+			if( i > 1) {
+				eliminated= findMatching(pairs,3);
+				pairs = new ArrayList<MyButton>();
+			}
+		}
+		return eliminated;
+		
+	}
+	public void removePairsFromCol(MyButton found) {
+		int col = found.getCol();
+			for(int row = 0; row < GRID_SIZE*3; row++) {
+				for(int i = 0; i < 2; i++) {
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() != 2) {
+						
+						nineGrid[row][col].removeCandidate(found.getCandidates().get(i));
+						//nineGrid[row][col].printCandidates();
+							
+					}
+				}
+				if(nineGrid[row][col].getCandidates().size() == 2) {
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)) 
+							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)))) {
+						nineGrid[row][col].removeCandidate(found.getCandidates().get(0));
+					}
+				}
+				if(nineGrid[row][col].getCandidates().size() == 2) {
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)) 
+							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)))) {
+						nineGrid[row][col].removeCandidate(found.getCandidates().get(1));
+					}
+				}
+			}
+			for(int row = 0; row < 9; row++) {
+				//Candidate list is not updating so printing working algorithm to console for now.
+				System.out.println("row: " + row + " col: " + col);
+				System.out.println(nineGrid[row][col].getCandidates());
+				setNineGrid(nineGrid);
+			}
+			
+	}
 }
