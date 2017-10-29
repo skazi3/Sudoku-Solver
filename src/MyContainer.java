@@ -158,7 +158,7 @@ public class MyContainer extends Container {
 	}
 	//_______________________________________________________________________//
 	public void removeCandidatesRow(MyButton b){
-		for(int i =0; i < 9; i++){
+		for(int i =0; i < GRID_SIZE*3; i++){
 			 if(nineGrid[b.getRow()][i].getVal() != b.getVal() && nineGrid[b.getRow()][i].getVal() != -1){
 				 //if candidates still has the value we remove it
 				if(b.getCandidates().contains(nineGrid[b.getRow()][i].getVal()))
@@ -169,7 +169,7 @@ public class MyContainer extends Container {
 	}
 	//_______________________________________________________________________//
 	public void removeCandidateColumn(MyButton b){
-		for(int i = 0; i < 9; i++){
+		for(int i = 0; i < GRID_SIZE*3; i++){
 			if(nineGrid[i][b.getCol()].getVal() != b.getVal() && nineGrid[i][b.getCol()].getVal() != -1){
 				if(b.getCandidates().contains(nineGrid[i][b.getCol()].getVal()))
 					b.removeCandidate(nineGrid[i][b.getCol()].getVal());
@@ -252,7 +252,12 @@ public class MyContainer extends Container {
 	}
 	public boolean performHiddenSingle() {
 		boolean isResolved = false;
-		
+		HashMap<MyButton, ArrayList<Integer>> hiddenSingle = new HashMap<MyButton, ArrayList<Integer>>();
+		/*
+		 * idea: implement some kind of a hashmap where we loop through all buttons in a box,
+		 * row, and column and then check if a candidate only appears once when we iterate through
+		 * the hashmap. if it only appears once, the key to the hashmap will be the button that
+		 * should get that value. hashmap should be of type <MyButton, ArrayList<Integer>>*/
 		
 		
 		return isResolved;
