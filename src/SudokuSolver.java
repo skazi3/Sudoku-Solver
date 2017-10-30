@@ -94,14 +94,15 @@ public class SudokuSolver extends JFrame{
 		aboutGame.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				JOptionPane.showMessageDialog(null,
-		    		    "How our interface works!:",
-		    		    "About the Interface:\nOur Sudoku game contains one large JFrame, with nine"
-		    		    + "subContainers, and an underlying nine by nine container to connect each box"
-		    		    + "A panel on the left side will inform you about which button you have clicked to place "
-		    		    + "into the tile, if you have the eraser chosen, or will display candidate information about"
-		    		    + "each button. The hints section allows you to toggle on fill which will stop you from placing"
-		    		    + "a wrong button, and it also helps perform algorithms to resolve a single cell. Clicking the last"
+		    		    "How our interface works!:\nOur Sudoku game contains one large JFrame, with nine\n"
+		    		    + "subContainers, and an underlying nine by nine container to connect each box\n"
+		    		    + "A panel on the left side will inform you about which button you have clicked to\n place "
+		    		    + "into the tile, if you have the eraser chosen, or will display candidate information\n about"
+		    		    + "each button. The hints section allows you to toggle on fill which will stop you from\n placing"
+		    		    + "a wrong button, and it also helps perform algorithms to resolve a single cell.\nClicking the last"
 		    		    + "menu item will solve the entire board.",
+
+		    		    "About the interface!",
 		    		    JOptionPane.PLAIN_MESSAGE);
 			}
 		});
