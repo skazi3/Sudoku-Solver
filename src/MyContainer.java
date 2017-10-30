@@ -93,17 +93,11 @@ public class MyContainer extends Container {
 	
 	public int calculateRow(int i){
 		switch(index){
-		case 0:
-		case 1:
-		case 2:
+		case 0:	case 1: case 2:
 			return i;
-		case 3:
-		case 4:
-		case 5:
+		case 3:	case 4:	case 5:
 			return i+3;
-		case 6:
-		case 7: 
-		case 8:
+		case 6:	case 7:	case 8:
 			return i+6;
 			
 		default:
@@ -119,6 +113,34 @@ public class MyContainer extends Container {
 			return i+3;
 		case 2:	case 5:	case 8:
 			return i+6;
+			
+		default:
+			return -1;	
+		}
+	}
+	
+	public int calculateRowIn3(int i){
+		switch(i){
+		case 0:	case 1: case 2:
+			return i;
+		case 3:	case 4:	case 5:
+			return i-3;
+		case 6:	case 7:	case 8:
+			return i-6;
+			
+		default:
+			return -1;	
+		}
+	}
+	//_______________________________________________________________________//
+	public int calculateColIn3(int i){
+		switch(i){
+		case 0:	case 1: case 2:
+			return i;
+		case 3:	case 4:	case 5:
+			return i-3;
+		case 6:	case 7:	case 8:
+			return i-6;
 			
 		default:
 			return -1;	
@@ -250,7 +272,14 @@ public class MyContainer extends Container {
 		}
 		return isResolved;
 	}
-
+	
+	
+	public void removeHelper(int row, int col, int val){
+		int r, c;
+		r = calculateRowIn3(row);
+		c = calculateColIn3(col);
+		numbers[r][c].removeCandidate(val);
+	}
 /*______________________________________________________*/	
 	public boolean performNakedPairsContainer() {
 		boolean resolved = false;
@@ -409,10 +438,10 @@ public class MyContainer extends Container {
 		int row = found.getRow();
 			for(int col = 0; col < GRID_SIZE*3; col++) {
 				for(int i = 0; i < 2; i++) {
-					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() != 2) {
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() > 2) {
 						
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(i));
-						//nineGrid[row][col].printCandidates();
+						gridPane.removeCandidate(found.getCandidates().get(i), row, col);
 							
 					}
 				}
@@ -420,23 +449,20 @@ public class MyContainer extends Container {
 					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)) 
 							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)))) {
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(0));
+						gridPane.removeCandidate(found.getCandidates().get(0), row, col);
 					}
 				}
 				if(nineGrid[row][col].getCandidates().size() == 2) {
 					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)) 
 							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)))) {
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(1));
+						gridPane.removeCandidate(found.getCandidates().get(1), row, col);
 					}
 				}
 			}
-			for(int col = 0; col < 9; col++) {
-				//Candidate list is not updating so printing working algorithm to console for now.
-				System.out.println("row: " + row + " col: " + col);
-				System.out.println(nineGrid[row][col].getCandidates());
-				setNineGrid(nineGrid);
-			}
-			
+	
 	}
+	
 /*_________________________________________________________________*/
 	public boolean pairsCols(){
 		boolean eliminated = false;
@@ -462,31 +488,26 @@ public class MyContainer extends Container {
 		int col = found.getCol();
 			for(int row = 0; row < GRID_SIZE*3; row++) {
 				for(int i = 0; i < 2; i++) {
-					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() != 2) {
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() > 2) {
 						
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(i));
-						//nineGrid[row][col].printCandidates();
-							
+						gridPane.removeCandidate(found.getCandidates().get(i), row, col);
 					}
 				}
 				if(nineGrid[row][col].getCandidates().size() == 2) {
 					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)) 
 							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)))) {
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(0));
+						gridPane.removeCandidate(found.getCandidates().get(0), row, col);
 					}
 				}
 				if(nineGrid[row][col].getCandidates().size() == 2) {
 					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)) 
 							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)))) {
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(1));
+						gridPane.removeCandidate(found.getCandidates().get(1), row, col);
 					}
 				}
-			}
-			for(int row = 0; row < 9; row++) {
-				//Candidate list is not updating so printing working algorithm to console for now.
-				System.out.println("row: " + row + " col: " + col);
-				System.out.println(nineGrid[row][col].getCandidates());
-				
 			}
 			
 	}

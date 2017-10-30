@@ -61,7 +61,8 @@ public class MyButton extends JButton{
 		if (val == -1)
 			return;
 		int i = candidates.indexOf(val);
-		candidates.remove(i);
+		if(i!= -1)
+		 candidates.remove(i);
 	}
 	public void resetCandidateList(){
 		candidates.removeAll(candidates);
