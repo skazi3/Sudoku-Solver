@@ -154,7 +154,8 @@ public class SudokuSolver extends JFrame{
 		JMenuItem solvePuzzle = new JMenuItem("Solve Puzzle");
 		lockedCandidate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
+				sudokuGrid.solvePuzzle(hiddenSingle, single, lockedCandidate, nakedPairs);
 			}
 		});
 		

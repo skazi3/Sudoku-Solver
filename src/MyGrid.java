@@ -13,6 +13,7 @@ public class MyGrid{
 	private Container              container;
 	
 	private int          GRID_SIZE = 3;
+	private int			 SOLVED_SIZE = 81;
 	private boolean      showCandidates;
 	
 
@@ -292,6 +293,26 @@ public class MyGrid{
 		}
 		MyContainer single = subContainers.get(1);
 		 single.performNakedPairsRowandCol();
+	}
+	//solve puzzle by repeatedly performing algorithms
+	public void solvePuzzle(JMenuItem hs, JMenuItem s, JMenuItem lc, JMenuItem np) {
+		boolean isSolved = false;
+		int count = 0;
+		while(!isSolved) {
+			hs.doClick();
+			s.doClick();
+			lc.doClick();
+			np.doClick();
+			for(int i = 0; i < GRID_SIZE*3; i++) {
+				for(int j = 0; j < GRID_SIZE*3; j++) {
+					if(nineGrid[i][j].getActionCommand() != " ")
+						count++;
+				}	
+			}
+			if(count == SOLVED_SIZE)
+				isSolved = true;
+
+		}
 	}
 	
 	private int getContainerIndex(int row, int col) {
