@@ -274,20 +274,31 @@ public class MyContainer extends Container {
 	}
 	
 	
-	public void removeHelper(int row, int col, int val){
+	public boolean removeHelper(int row, int col, int val){
 		int r, c;
 		r = calculateRowIn3(row);
 		c = calculateColIn3(col);
 		numbers[r][c].removeCandidate(val);
+		
+		if(numbers[r][c].getCandidates().size() == 1){
+			
+			int v = numbers[r][c].getCandidates().get(0);
+			numbers[r][c].setText(Integer.toString(v));
+			gridPane.addNineGridButton(numbers[r][c].getRow(), numbers[r][c].getCol(), v);
+			nineGrid[numbers[r][c].getRow()][numbers[r][c].getCol()].setText(Integer.toString(numbers[r][c].getCandidates().get(0)));
+			updateButtons();
+			
+			JOptionPane.showMessageDialog(null,
+	    		    "Naked Pairs algorithm found on button at [" + (numbers[r][c].getRow()+1) + "," + (numbers[r][c].getCol()+1) + "] and "
+	    		    		+ "resolved with a value of "+ v  + "\n",
+	    		    "SINGLE",
+	    		    JOptionPane.PLAIN_MESSAGE);
+			return true;
+		}
+		return false;
 	}
 /*______________________________________________________*/	
-	public boolean performNakedPairsContainer() {
-		boolean resolved = false;
-		if(pairsContainer() == true) 
-			resolved = true;
-		return resolved;
-		
-}
+
 	public boolean performHiddenSingle() {
 		boolean isResolved = false;
 		
@@ -333,19 +344,14 @@ public class MyContainer extends Container {
 	
 	}
 /*______________________________________________________*/	
-	public boolean performNakedPairsRowandCol() {
+	public boolean performNakedPairsContainer() {
 		boolean resolved = false;
-		removeCandidateRowandCol();
-		
-		if(pairsRows()== true)
+		if(pairsContainer() == true) 
 			resolved = true;
-		if(pairsCols() == true) 
-			resolved = true;
-		
 		return resolved;
 		
 	}
-/*______________________________________________________*/	
+	/*______________________________________________________*/	
 	public boolean pairsContainer() {
 		ArrayList<MyButton> nakedPairList = new ArrayList<MyButton>();
 		boolean eliminated = false;
@@ -365,7 +371,8 @@ public class MyContainer extends Container {
 		}
 		return eliminated;
 	}
-/*______________________________________________________*/		
+	
+	/*______________________________________________________*/		
 	public boolean findMatching(ArrayList<MyButton> pairs,int determine){
 		boolean eliminated = false;
 		for(int i = 0; i < pairs.size(); i++) {
@@ -376,18 +383,17 @@ public class MyContainer extends Container {
 					eliminated = true;
 					}
 					if(determine == 2) {
-						removePairsFromRow(pairs.get(i));
-						eliminated = true;
+						eliminated = removePairsFromRow(pairs.get(i));
 					}
 					if(determine == 3) {
-						removePairsFromCol(pairs.get(i));
-						eliminated = true;
+						eliminated = removePairsFromCol(pairs.get(i));
 					}
 				}
 			}
 		}
 		return eliminated;
 	}
+
 /*______________________________________________________*/		
 	public void removeFromContainer(MyButton found) {
 		for(int row = 0; row < GRID_SIZE; row++) {
@@ -400,7 +406,20 @@ public class MyContainer extends Container {
 			}
 		}
 	}
-/*______________________________________________________*/		
+/*______________________________________________________*/	
+	public boolean performNakedPairsRowandCol() {
+		boolean resolved = false;
+		removeCandidateRowandCol();
+		
+		if(pairsRows()== true)
+			resolved = true;
+		if(pairsCols() == true) 
+			resolved = true;
+		
+		return resolved;
+		
+	}
+	/*______________________________________________________*/	
 	public void removeCandidateRowandCol() {
 		for(int row = 0; row < 9; row++) {
 			for(int col = 0; col <9; col++) {
@@ -433,37 +452,7 @@ public class MyContainer extends Container {
 		}
 		return resolved;
 	}
-/*______________________________________________________*/
-	public void removePairsFromRow(MyButton found) {
-		int row = found.getRow();
-			for(int col = 0; col < GRID_SIZE*3; col++) {
-				for(int i = 0; i < 2; i++) {
-					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() > 2) {
-						
-						nineGrid[row][col].removeCandidate(found.getCandidates().get(i));
-						gridPane.removeCandidate(found.getCandidates().get(i), row, col);
-							
-					}
-				}
-				if(nineGrid[row][col].getCandidates().size() == 2) {
-					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)) 
-							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)))) {
-						nineGrid[row][col].removeCandidate(found.getCandidates().get(0));
-						gridPane.removeCandidate(found.getCandidates().get(0), row, col);
-					}
-				}
-				if(nineGrid[row][col].getCandidates().size() == 2) {
-					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)) 
-							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)))) {
-						nineGrid[row][col].removeCandidate(found.getCandidates().get(1));
-						gridPane.removeCandidate(found.getCandidates().get(1), row, col);
-					}
-				}
-			}
-	
-	}
-	
-/*_________________________________________________________________*/
+	/*_________________________________________________________________*/
 	public boolean pairsCols(){
 		boolean eliminated = false;
 		ArrayList<MyButton> pairs = new ArrayList<MyButton>();
@@ -484,31 +473,75 @@ public class MyContainer extends Container {
 		return eliminated;
 		
 	}
-	public void removePairsFromCol(MyButton found) {
-		int col = found.getCol();
-			for(int row = 0; row < GRID_SIZE*3; row++) {
+/*______________________________________________________*/
+	public boolean removePairsFromRow(MyButton found) {
+		boolean resolved = false;
+		int row = found.getRow();
+			for(int col = 0; col < GRID_SIZE*3; col++) {
 				for(int i = 0; i < 2; i++) {
 					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() > 2) {
 						
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(i));
-						gridPane.removeCandidate(found.getCandidates().get(i), row, col);
+						resolved = gridPane.removeCandidate(found.getCandidates().get(i), row, col);
+						if(resolved)
+							return true;
 					}
 				}
 				if(nineGrid[row][col].getCandidates().size() == 2) {
 					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)) 
 							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)))) {
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(0));
-						gridPane.removeCandidate(found.getCandidates().get(0), row, col);
+						resolved = gridPane.removeCandidate(found.getCandidates().get(0), row, col);
+						if(resolved)
+							return true;
 					}
-				}
-				if(nineGrid[row][col].getCandidates().size() == 2) {
 					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)) 
 							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)))) {
 						nineGrid[row][col].removeCandidate(found.getCandidates().get(1));
-						gridPane.removeCandidate(found.getCandidates().get(1), row, col);
+						resolved = gridPane.removeCandidate(found.getCandidates().get(1), row, col);
+						if(resolved)
+							return true;
+					}
+				}
+				
+				
+			}
+			return false;
+	}
+
+/*______________________________________________________*/
+
+	public boolean removePairsFromCol(MyButton found) {
+		boolean resolved = false;
+		int col = found.getCol();
+			for(int row = 0; row < GRID_SIZE*3; row++) {
+				for(int i = 0; i < 2; i++) {
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(i)) && nineGrid[row][col].getCandidates().size() > 2) {
+						
+						nineGrid[row][col].removeCandidate(found.getCandidates().get(i));
+						resolved = gridPane.removeCandidate(found.getCandidates().get(i), row, col);
+						if(resolved)
+							return true;
+					}
+				}
+				if(nineGrid[row][col].getCandidates().size() == 2) {
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)) 
+							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)))) {
+						nineGrid[row][col].removeCandidate(found.getCandidates().get(0));
+						resolved = gridPane.removeCandidate(found.getCandidates().get(0), row, col);
+						if(resolved)
+							return true;
+					}
+					if(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(1)) 
+							&& !(nineGrid[row][col].getCandidates().contains(found.getCandidates().get(0)))) {
+						nineGrid[row][col].removeCandidate(found.getCandidates().get(1));
+						resolved = gridPane.removeCandidate(found.getCandidates().get(1), row, col);
+						if(resolved)
+							return true;
 					}
 				}
 			}
 			
+			return false;
 	}
 }

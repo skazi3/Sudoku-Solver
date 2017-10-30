@@ -288,6 +288,7 @@ public class MyGrid{
 	public void performNakedPairsAlgorithm() {
 		for(MyContainer sc: subContainers) {
 			sc.performNakedPairsContainer();
+			
 		}
 		MyContainer single = subContainers.get(1);
 		 single.performNakedPairsRowandCol();
@@ -319,10 +320,11 @@ public class MyGrid{
 		
 	}
 	
-	public void removeCandidate( int val, int row, int col){
+	public boolean removeCandidate( int val, int row, int col){
 		
 		int containerNum = getContainerIndex(row, col);
-		subContainers.get(containerNum).removeHelper(row, col, val);
+		boolean resolved = subContainers.get(containerNum).removeHelper(row, col, val);
+		return resolved;
 		
 	}
 	//_______________________________________________________________________//
