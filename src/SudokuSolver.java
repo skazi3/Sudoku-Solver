@@ -110,7 +110,7 @@ public class SudokuSolver extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				JOptionPane.showMessageDialog(null,
 		    		    "This game was coded by: \nSarah Kazi: skazi3\n"
-		    		    + "Zaynab Almoujahed: \nKayla Condrella: kcondr3\n",
+		    		    + "Zaynab Almoujahed: zalmou2\nKayla Condrella: kcondr3\n",
 		    		    "About Us!",
 		    		    JOptionPane.PLAIN_MESSAGE);
 			}
